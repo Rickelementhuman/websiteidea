@@ -1,0 +1,4 @@
+# Deploy the Next.js app in element-human-nextjs/
+[build]
+  base    = "element-human-nextjs"
+  command = "npm run build"
