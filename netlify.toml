@@ -1,4 +1,6 @@
 # Deploy the Next.js app in element-human-nextjs/
+# Static export: next build produces element-human-nextjs/out/
 [build]
   base    = "element-human-nextjs"
   command = "npm run build"
+  publish = "out"
