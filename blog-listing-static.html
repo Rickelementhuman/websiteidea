@@ -1,0 +1,46 @@
+<!-- Completely Static Approach - No CMS Connection -->
+<style>
+    /* Same CSS as before... */
+</style>
+
+<div class="blog-listing-section">
+    <!-- Same HTML structure... -->
+</div>
+
+<script>
+class StaticBlogListing {
+    constructor() {
+        // Manually define your blog posts here
+        this.posts = [
+            {
+                id: 'post-1',
+                title: "Let's Analyze Norwich City's Mental Health Ad",
+                category: 'advertising',
+                summary: 'An ad powerfully conveyed, effortlessly accomplished without a big budget...',
+                image: 'https://cdn.prod.website-files.com/5eb03fc50b6790f90f3d773c/669856d3436687f54d7b297b_Norwich%20City%20Cover%20Photo.jpeg',
+                slug: 'norwich-city-mental-health-ad',
+                publishDate: '2024-07-15'
+            },
+            {
+                id: 'post-2', 
+                title: "Let's Analyze Global Action Plan's 'Stop Following Me' Ad",
+                category: 'advertising',
+                summary: "Let's analyze Global Action Plan's latest ad while exploring the importance of quick emotional reactions...",
+                image: 'https://cdn.prod.website-files.com/5eb03fc50b6790f90f3d773c/6699ad9b447f9031be21fa31_Global%20Action%20Plan%20Ad%20Cover%20Image.png',
+                slug: 'global-action-plans-stop-following-me-ad',
+                publishDate: '2024-07-15'
+            }
+            // Add more posts manually...
+        ];
+        
+        this.init();
+    }
+    
+    // Rest of the code is the same...
+}
+</script>
+
+<!-- 
+This approach requires manually updating the posts array 
+every time you add new blog posts to your CMS.
+-->

@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors - Use SPARINGLY (10% of design) */
+  --color-brand-green: #54E42B;
+  --color-brand-magenta: #FF2198;
+  --color-brand-cyan: #10A8B7;
+  --color-brand-violet: #8F21A1;
+  --color-brand-navy: #13202F;
+  --color-brand-yellow: #F9BE00;
+  --color-brand-red: #F60000;
+  
+  /* Neutral Colors - Use PRIMARILY (90% of design) */
+  --color-neutral-50: #FAFBFC;
+  --color-neutral-100: #F8F9FA;
+  --color-neutral-200: #F1F3F5;
+  --color-neutral-300: #E9ECEF;
+  --color-neutral-600: #6B7280;
+  --color-neutral-700: #4B5563;
+  --color-neutral-900: #1A202C;
+  
+  /* Glass Colors - Subtle transparency */
+  --color-glass-white: rgb(255 255 255 / 0.25);
+  --color-glass-light: rgb(255 255 255 / 0.35);
+  --color-glass-medium: rgb(255 255 255 / 0.5);
+  --color-glass-dark: rgb(255 255 255 / 0.7);
+
+  /* Font Families */
+  --font-family-poppins: var(--font-poppins), sans-serif;
+  --font-family-lora: var(--font-lora), serif;
+
+  /* Subtle Shadows for Glass */
+  --shadow-glass-sm: 0 4px 16px 0 rgb(31 38 135 / 0.05);
+  --shadow-glass: 0 8px 32px 0 rgb(31 38 135 / 0.08);
+  --shadow-glass-lg: 0 12px 48px 0 rgb(31 38 135 / 0.12);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-family-poppins);
+    color: var(--color-brand-navy);
+    background: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* Proper Glassmorphism Panels - White/Light with subtle transparency */
+  .glass-panel {
+    background: rgb(255 255 255 / 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.3);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 0.08);
+  }
+
+  .glass-panel-light {
+    background: rgb(255 255 255 / 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(255 255 255 / 0.4);
+    box-shadow: 0 4px 16px 0 rgb(31 38 135 / 0.05);
+  }
+
+  .glass-panel-dark {
+    background: rgb(255 255 255 / 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(255 255 255 / 0.5);
+    box-shadow: 0 12px 48px 0 rgb(31 38 135 / 0.12);
+  }
+
+  /* Glass Button - Minimal, elegant */
+  .glass-button {
+    background: rgb(255 255 255 / 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid rgb(255 255 255 / 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 16px 0 rgb(31 38 135 / 0.05);
+  }
+
+  .glass-button:hover {
+    background: rgb(255 255 255 / 0.4);
+    border-color: rgb(255 255 255 / 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px 0 rgb(31 38 135 / 0.1);
+  }
+
+  /* Glass Card - Clean, minimal with subtle accent on hover */
+  .glass-card {
+    position: relative;
+    background: rgb(255 255 255 / 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px 0 rgb(31 38 135 / 0.05);
+  }
+
+  .glass-card:hover {
+    background: rgb(255 255 255 / 0.4);
+    border-color: rgb(255 255 255 / 0.45);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 0.1);
+    transform: translateY(-4px);
+  }
+
+  /* Glass Card with Subtle Brand Accent - ONLY on hover */
+  .glass-card-accent {
+    position: relative;
+    background: rgb(255 255 255 / 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px 0 rgb(31 38 135 / 0.05);
+  }
+
+  .glass-card-accent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FF2198, #10A8B7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glass-card-accent:hover {
+    background: rgb(255 255 255 / 0.4);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 0.1);
+    transform: translateY(-4px);
+  }
+
+  .glass-card-accent:hover::before {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  /* Perspective for 3D transforms */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Minimal gradient for special occasions only */
+  .bg-gradient-subtle {
+    background: linear-gradient(135deg, #FAFBFC 0%, #F8F9FA 100%);
+  }
+
+  /* Dark Theme Gradients */
+  .bg-dark-gradient {
+    background: linear-gradient(135deg, #0A1628 0%, #0D3D47 50%, #13202F 100%);
+  }
+
+  .bg-dark-radial {
+    background: radial-gradient(ellipse at top, #1a2f4a 0%, #0A1628 50%, #13202F 100%);
+  }
+
+  /* Dark Glassmorphism */
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .glass-dark-accent {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* Gradient Orbs */
+  .gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .gradient-orb-lg {
+    filter: blur(120px);
+    opacity: 0.25;
+  }
+}
+
+/* Keyframe Animations - Smooth and subtle */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-panel,
+  .glass-panel-light,
+  .glass-panel-dark,
+  .glass-button,
+  .glass-card,
+  .glass-card-accent {
+    background: rgb(255 255 255 / 0.95);
+  }
+}

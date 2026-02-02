@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Calculator</title>
+</head>
+<body>
+
+<style>
+    :root {
+        --background-color: #fff;
+        --container-bg-color: #fff;
+        --primary-text-color: #222;
+        --secondary-text-color: #6c6c80;
+        --accent-color: #4a3aff;
+        --input-bg-color: #f7f7fa;
+        --border-color: #e0e0e8;
+        --table-header-bg: #f3f3fa;
+        --table-header-color: #fff;
+        --table-accent-bg: #4a3aff;
+    }
+
+    .pricing-calculator {
+        font-family: 'Poppins', sans-serif;
+        background-color: #ffffff;
+        color: var(--primary-text-color);
+        max-width: 1100px;
+        margin: 0 auto 60px auto;
+        padding: 20px;
+    }
+
+    .pricing-calculator * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .section-container {
+        background: var(--container-bg-color);
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(44, 62, 80, 0.08);
+        padding: 48px 32px 40px 32px;
+        width: 100%;
+    }
+
+    .horizontal-flex {
+        display: flex;
+        gap: 40px;
+    }
+    .left-col, .right-col {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+    .left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        justify-content: flex-start;
+    }
+    .right-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .credit-price-header {
+        text-align: center;
+        margin-bottom: 32px;
+        padding: 24px;
+        background: linear-gradient(135deg, var(--accent-color), #6a5cff);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(74, 58, 255, 0.15);
+    }
+    
+    .credit-price-text {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--accent-color);
+        font-weight: 700;
+        margin-bottom: 8px;
+        font-size: 2.2rem;
+    }
+    .subtitle {
+        text-align: center;
+        color: var(--secondary-text-color);
+        margin-bottom: 32px;
+        font-weight: 500;
+        font-size: 1.1rem;
+    }
+    .info-box { display: none; }
+    .info-box p {
+        margin: 0 0 8px 0;
+        color: var(--secondary-text-color);
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box b { color: var(--accent-color); }
+    .copy-title, .copy-container, .copy-badges, .badge, .copy-subtext, .copy-sep, .copy-note { display: none; }
+
+    .why-credits { text-align: center; }
+    .why-label { color: var(--primary-text-color); font-weight: 600; margin-bottom: 8px; }
+    .chip-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .chip {
+        background: var(--input-bg-color);
+        border: 1px solid var(--border-color);
+        color: var(--secondary-text-color);
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    .footnote { color: var(--secondary-text-color); font-size: 0.7rem; line-height: 1.2; font-style: italic; text-align: center; margin-top: 4px; opacity: 0.7; }
+
+    /* Two-column Why Credits layout */
+    .why-credits-grid {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        align-items: start;
+        gap: 16px;
+        margin: 0 auto 6px auto;
+        max-width: 820px;
+    }
+    .why-title { text-align: center; align-self: center; justify-self: center; }
+    .why-badge {
+        color: var(--primary-text-color);
+        font-weight: 800;
+        font-size: 1.4rem;
+    }
+    .why-title::after {
+        content: "";
+        display: block;
+        height: 3px;
+        width: 36px;
+        margin: 8px auto 0 auto;
+        border-radius: 3px;
+        background: linear-gradient(135deg, var(--table-accent-bg), #6a5cff);
+        opacity: 0.65;
+    }
+    .why-list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        color: var(--secondary-text-color);
+        font-size: 1.05rem;
+        line-height: 1.9;
+        text-align: left;
+    }
+    .why-list li { margin: 8px 0 12px 0; padding-left: 0; }
+    .why-list li::before, .why-list li::after { content: none !important; }
+
+    /* Credit table styles */
+    .credit-table-container { margin-top: 10px; }
+    .credit-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--white);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(44, 62, 80, 0.06);
+    }
+    .credit-table th {
+        background: var(--table-accent-bg);
+        color: var(--table-header-color);
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.95rem;
+    }
+    .credit-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--primary-text-color);
+        font-size: 0.9rem;
+        vertical-align: middle;
+    }
+    .what-title { font-weight: 700; font-size: 1rem; margin: 0 0 4px 0; color: var(--primary-text-color); }
+    .what-list { margin: 0; padding-left: 18px; color: var(--primary-text-color); font-size: 0.9rem; line-height: 1.6; }
+    .credit-table tr:last-child td { border-bottom: none; }
+    .credit-table tbody tr:nth-child(even) { background: #fafafb; }
+    .credit-table tbody tr:hover { background: #f6f7ff; transition: background 0.2s ease; }
+    .credit-table .credits-col {
+        width: 150px;
+        text-align: center;
+        border-left: 1px solid var(--border-color);
+    }
+    .credits-num { font-weight: 800; font-size: 1.2rem; color: var(--accent-color); }
+    @media (max-width: 480px) {
+        /* Keep desktop layout on phones */
+        .credit-table thead { display: table-header-group; }
+        .credit-table tbody tr { display: table-row; margin: 0; border: none; border-radius: 0; box-shadow: none; }
+        .credit-table td { display: table-cell; width: auto; padding: 12px 14px; text-align: left; }
+        .credit-table td:first-child { border-bottom: 1px solid var(--border-color); }
+        .credit-table td.credits-col { width: 88px; border-left: 1px solid var(--border-color); background: transparent; text-align: center; display: table-cell; padding: 12px 10px; }
+        .credit-table th:last-child { text-align: center !important; width: 88px; padding: 12px 10px; }
+        .credit-table td.credits-col::before { content: none !important; }
+        .credits-num { font-size: 1.2rem; display: inline-flex; width: 100%; justify-content: center; }
+        .what-title { font-size: 1rem; text-align: left; }
+        .what-list { font-size: 0.9rem; padding-left: 14px; line-height: 1.6; text-align: left; list-style-position: outside; }
+    }
+
+    @media (max-width: 768px) {
+        .why-credits-grid { grid-template-columns: 1fr; gap: 8px; }
+        .why-title { text-align: center; }
+        .why-list { padding-left: 0; font-size: 0.95rem; }
+    }
+    .volume-table-container {
+        margin-bottom: 0;
+    }
+    .volume-table-title {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    table.volume-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--table-header-bg);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .volume-table th {
+        background: var(--table-accent-bg);
+        color: var(--table-header-color);
+        padding: 16px 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .volume-table td {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--primary-text-color);
+        font-size: 0.9rem;
+    }
+    .volume-table tr:last-child td {
+        border-bottom: none;
+    }
+    .input-group {
+        margin-bottom: 24px;
+    }
+    .currency-switch {
+        display: flex;
+        background: var(--input-bg-color);
+        border-radius: 8px;
+        padding: 4px;
+        border: 1px solid var(--border-color);
+    }
+    .currency-btn {
+        flex: 1;
+        padding: 10px 16px;
+        border: none;
+        background: transparent;
+        color: var(--secondary-text-color);
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    .currency-btn.active {
+        background: var(--accent-color);
+        color: white;
+    }
+    .label-with-value {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    label {
+        display: block;
+        margin-bottom: 16px;
+        color: var(--primary-text-color);
+        font-weight: 500;
+        font-size: 1rem;
+    }
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        cursor: pointer;
+        outline: none;
+        border-radius: 12px;
+        height: 8px;
+        background: var(--input-bg-color);
+        border: 1px solid var(--border-color);
+    }
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 20px;
+        width: 20px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        border: none;
+        transition: .2s ease-in-out;
+    }
+    input[type="range"]::-moz-range-thumb {
+        height: 20px;
+        width: 20px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        border: none;
+        transition: .2s ease-in-out;
+    }
+    input[type="number"], select {
+        width: 100%;
+        padding: 13px 14px;
+        background-color: var(--input-bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--primary-text-color);
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input[type="number"]:focus, select:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 2px rgba(74, 58, 255, 0.12);
+    }
+    .results-container {
+        background: var(--input-bg-color);
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid var(--border-color);
+    }
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .result-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    .result-label {
+        color: var(--secondary-text-color);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    .result-value {
+        color: var(--primary-text-color);
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .final-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 2px solid var(--accent-color);
+    }
+    .final-price .result-label {
+        color: var(--primary-text-color);
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    .final-price .result-value {
+        color: var(--accent-color);
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .pricing-disclaimer {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .pricing-disclaimer p {
+        font-size: 0.75rem;
+        color: var(--secondary-text-color);
+        margin: 0;
+        opacity: 0.8;
+    }
+
+    .tooltip-trigger {
+        position: relative;
+        cursor: help;
+        color: var(--accent-color);
+        transition: color 0.3s ease;
+    }
+
+    .tooltip-trigger:hover {
+        color: #3a2ce6;
+    }
+
+    .tooltip {
+        position: fixed;
+        background: var(--background-color);
+        color: var(--primary-text-color);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        max-width: 250px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        pointer-events: none;
+        line-height: 1.4;
+        border: 1px solid #e0e0e0;
+    }
+
+    .tooltip.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .info-text {
+        margin: 8px 0 16px 0;
+    }
+    
+    .info-text p {
+        color: var(--secondary-text-color);
+        font-size: 0.9rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .pricing-calculator {
+            max-width: 100%;
+            padding: 15px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .horizontal-flex {
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .section-container {
+            padding: 24px 16px;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .left-col, .right-col {
+            width: 100%;
+            min-width: 0;
+        }
+        
+        .volume-table-container {
+            margin-bottom: 24px;
+        }
+        
+        .volume-table {
+            font-size: 0.85rem;
+        }
+        
+        .volume-table th,
+        .volume-table td {
+            padding: 12px 8px;
+        }
+        
+        .info-box {
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        
+        .credit-price-header {
+            margin-bottom: 24px;
+            padding: 20px;
+        }
+        
+        .credit-price-text {
+            font-size: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .currency-switch {
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .currency-btn {
+            width: 100%;
+            padding: 12px 16px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        /* Intentionally left minimal to keep desktop styles on phones */
+    }
+
+    /* Force desktop-like table styling on very small screens */
+    @media (max-width: 478px) {
+        .volume-table { font-size: 0.9rem; }
+        .volume-table th,
+        .volume-table td { padding: 16px 20px; }
+        .credit-table th,
+        .credit-table td { padding: 12px 14px; }
+        .credit-table .credits-col { width: 150px; }
+    }
+</style>
+
+<div class="pricing-calculator">
+    <div class="section-container">
+        <div class="credit-price-header">
+            <p class="credit-price-text" id="credit-price-display">1 Credit = $1,995</p>
+        </div>
+        
+        <div class="horizontal-flex">
+            <div class="left-col">
+                <div class="credit-table-container">
+                    <table class="credit-table">
+                                <thead>
+                                    <tr>
+                                        <th>What you get</th>
+                                        <th style="text-align:center;">Credits</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="what-title">Creative</div>
+                                            <ul class="what-list">
+                                                <li>Creative tested</li>
+                                                <li>Essentials snapshot included</li>
+                                            </ul>
+                                        </td>
+                                        <td class="credits-col"><span class="credits-num">1</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="what-title">Data Access</div>
+                                            <ul class="what-list">
+                                                <li>Access to all results of your campaign</li>
+                                                <li>Insights Dashboard and Data Export</li>
+                                            </ul>
+                                        </td>
+                                        <td class="credits-col"><span class="credits-num">1</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="what-title">Full Campaign Report</div>
+                                            <ul class="what-list">
+                                                <li>Deep diagnostics across attention, emotion and recall</li>
+                                                <li>Covers up to 12 creatives per report</li>
+                                                <li>Includes Data Access</li>
+                                            </ul>
+                                        </td>
+                                        <td class="credits-col"><span class="credits-num">2</span></td>
+                                    </tr>
+                                </tbody>
+                    </table>
+                </div>
+                <div class="volume-table-container">
+                    <div class="volume-table-title">Volume Discounts</div>
+                    <table class="volume-table">
+                        <thead>
+                            <tr>
+                                <th># Credits</th>
+                                <th>Discount</th>
+                                <th>Credit Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1–50</td>
+                                <td>0%</td>
+                                <td id="vol-tier-1">$1,995</td>
+                            </tr>
+                            <tr>
+                                <td>51–150</td>
+                                <td>5%</td>
+                                <td id="vol-tier-2">$1,895</td>
+                            </tr>
+                            <tr>
+                                <td>151+</td>
+                                <td>15%</td>
+                                <td id="vol-tier-3">$1,695</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="volume-table-container">
+                    <div class="volume-table-title">Pay in Advance</div>
+                    <table class="volume-table">
+                        <thead>
+                            <tr>
+                                <th>Payment Term</th>
+                                <th>Discount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monthly in advance</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Quarterly in advance</td>
+                                <td>5%</td>
+                            </tr>
+                            <tr>
+                                <td>Annual in advance</td>
+                                <td>10%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="right-col">
+                <div class="input-group">
+                    <label>Currency</label>
+                    <div class="currency-switch">
+                        <button class="currency-btn active" data-currency="USD">$ USD</button>
+                        <button class="currency-btn" data-currency="GBP">£ GBP</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="label-with-value">
+                        <label for="num-campaigns">Number of <span class="tooltip-trigger" data-tooltip="A campaign represents a complete marketing initiative with one or multiple creatives">Campaigns</span></label>
+                        <span id="campaigns-value">1</span>
+                    </div>
+                    <input type="range" id="num-campaigns" value="1" min="1" max="50">
+                </div>
+                <div class="input-group">
+                    <div class="label-with-value">
+                        <label for="num-creatives">Number of <span class="tooltip-trigger" data-tooltip="Individual pieces of content or video's that you want to test">Creatives</span></label>
+                        <span id="creatives-value">5</span>
+                    </div>
+                    <input type="range" id="num-creatives" value="5" min="1" max="12">
+                </div>
+                <div class="input-group">
+                    <div class="label-with-value">
+                        <label for="num-data-access">Number of <span class="tooltip-trigger" data-tooltip="Access to all results of your campaign, including Insights Dashboard and Data Export">Data Access</span></label>
+                        <span id="data-access-value">0</span>
+                    </div>
+                    <input type="range" id="num-data-access" value="0" min="0" max="1">
+                </div>
+                <div class="input-group">
+                    <div class="label-with-value">
+                        <label for="num-reports">Number of <span class="tooltip-trigger" data-tooltip="Uses 2 credits per report; covers up to 12 creatives per campaign; includes deep diagnostics across attention, emotion and recall">Full Reports</span></label>
+                        <span id="reports-value">0</span>
+                    </div>
+                    <input type="range" id="num-reports" value="0" min="0" max="1">
+                </div>
+                <div class="info-text">
+                    <p>1 credit = 1 creative. 2 credits = full campaign report (includes data access). 1 credit = data access only. Total reports + data access cannot exceed your campaign count.</p>
+                </div>
+                <div class="input-group">
+                    <label for="payment-term">Payment Term</label>
+                    <select id="payment-term">
+                        <option value="monthly">Monthly in advance (0% discount)</option>
+                        <option value="quarterly">Quarterly in advance (5% discount)</option>
+                        <option value="annual">Annual in advance (10% discount)</option>
+                    </select>
+                </div>
+
+                <div class="results-container">
+                    <div class="result-item">
+                        <span class="result-label">Total Credits</span>
+                        <span class="result-value" id="total-credits">5</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Price per Credit</span>
+                        <span class="result-value" id="price-per-credit">$1,995</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Volume Discount</span>
+                        <span class="result-value" id="volume-discount">0%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Payment Term Discount</span>
+                        <span class="result-value" id="payment-discount">0%</span>
+                    </div>
+                    <div class="final-price">
+                        <span class="result-label">Total Price</span>
+                        <span class="result-value" id="total-price">$9,975*</span>
+                    </div>
+                            <div class="pricing-disclaimer">
+            <p>*Prices exclude sales tax, where applicable.</p>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currencySwitch = document.querySelector('.currency-switch');
+        const numCampaignsInput = document.getElementById('num-campaigns');
+        const campaignsValueEl = document.getElementById('campaigns-value');
+        const numCreativesInput = document.getElementById('num-creatives');
+        const creativesValueEl = document.getElementById('creatives-value');
+        const numReportsInput = document.getElementById('num-reports');
+        const reportsValueEl = document.getElementById('reports-value');
+        const numDataAccessInput = document.getElementById('num-data-access');
+        const dataAccessValueEl = document.getElementById('data-access-value');
+        const paymentTermSelect = document.getElementById('payment-term');
+        const totalCreditsEl = document.getElementById('total-credits');
+        const pricePerCreditEl = document.getElementById('price-per-credit');
+        const volumeDiscountEl = document.getElementById('volume-discount');
+        const paymentDiscountEl = document.getElementById('payment-discount');
+        const totalPriceEl = document.getElementById('total-price');
+        const creditPriceDisplayEl = document.getElementById('credit-price-display');
+
+        const volTier1El = document.getElementById('vol-tier-1');
+        const volTier2El = document.getElementById('vol-tier-2');
+        const volTier3El = document.getElementById('vol-tier-3');
+
+        const pricingData = {
+            USD: {
+                symbol: '$',
+                prices: {
+                    tier1: 1995,
+                    tier2: 1895,
+                    tier3: 1695
+                }
+            },
+            GBP: {
+                symbol: '£',
+                prices: {
+                    tier1: 1495,
+                    tier2: 1420,
+                    tier3: 1271
+                }
+            }
+        };
+        let currentCurrency = 'USD';
+
+        function calculatePrice() {
+            const currency = currentCurrency;
+            const symbol = pricingData[currency].symbol;
+            const prices = pricingData[currency].prices;
+
+            let campaigns = parseInt(numCampaignsInput.value) || 1;
+            let totalCreatives = parseInt(numCreativesInput.value) || 1;
+            let totalReports = parseInt(numReportsInput.value) || 0;
+            let totalDataAccess = parseInt(numDataAccessInput.value) || 0;
+            
+            // Total credits is creatives + (reports * 2) + data access (each report costs 2 credits, data access costs 1 credit)
+            let totalCredits = totalCreatives + (totalReports * 2) + totalDataAccess;
+            
+            totalCreditsEl.textContent = totalCredits;
+            let pricePerCredit;
+            let volumeDiscountPercent = 0;
+            if (totalCredits >= 1 && totalCredits <= 50) {
+                pricePerCredit = prices.tier1;
+                volumeDiscountPercent = 0;
+            } else if (totalCredits >= 51 && totalCredits <= 150) {
+                pricePerCredit = prices.tier2;
+                volumeDiscountPercent = 5;
+            } else if (totalCredits > 150) {
+                pricePerCredit = prices.tier3;
+                volumeDiscountPercent = 15;
+            } else {
+                pricePerCredit = prices.tier1;
+                volumeDiscountPercent = 0;
+            }
+            pricePerCreditEl.textContent = `${symbol}${pricePerCredit.toLocaleString()}`;
+            volumeDiscountEl.textContent = `${volumeDiscountPercent}%`;
+            let subtotal = totalCredits * pricePerCredit;
+            const paymentTerm = paymentTermSelect.value;
+            let paymentDiscountPercent = 0;
+            if (paymentTerm === 'quarterly') {
+                paymentDiscountPercent = 5;
+            } else if (paymentTerm === 'annual') {
+                paymentDiscountPercent = 10;
+            }
+            paymentDiscountEl.textContent = `${paymentDiscountPercent}%`;
+            let finalPrice = subtotal * (1 - (paymentDiscountPercent / 100));
+            totalPriceEl.textContent = `${symbol}${finalPrice.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        }
+
+        function updateCreditPriceDisplay() {
+            const currency = currentCurrency;
+            const symbol = pricingData[currency].symbol;
+            const price = pricingData[currency].prices.tier1; // Use tier1 price (no volume discount)
+            
+            if (creditPriceDisplayEl) {
+                creditPriceDisplayEl.textContent = `1 Credit = ${symbol}${price.toLocaleString()}`;
+            }
+        }
+
+        function updateUIForCurrency() {
+            const currency = currentCurrency;
+            const symbol = pricingData[currency].symbol;
+            const prices = pricingData[currency].prices;
+
+            if (volTier1El) volTier1El.textContent = `${symbol}${prices.tier1.toLocaleString()}`;
+            if (volTier2El) volTier2El.textContent = `${symbol}${prices.tier2.toLocaleString()}`;
+            if (volTier3El) volTier3El.textContent = `${symbol}${prices.tier3.toLocaleString()}`;
+            updateCreditPriceDisplay();
+            calculatePrice();
+        }
+
+        currencySwitch.addEventListener('click', (e) => {
+            const target = e.target.closest('.currency-btn');
+            if (target && !target.classList.contains('active')) {
+                currencySwitch.querySelector('.active').classList.remove('active');
+                target.classList.add('active');
+                currentCurrency = target.dataset.currency;
+                updateUIForCurrency();
+            }
+        });
+
+        numCampaignsInput.addEventListener('input', () => {
+            campaignsValueEl.textContent = numCampaignsInput.value;
+            // Update creatives max based on campaigns (12 per campaign)
+            const maxCreatives = parseInt(numCampaignsInput.value) * 12;
+            numCreativesInput.max = maxCreatives;
+            // Always update creatives value if it exceeds the new max
+            const currentCreatives = parseInt(numCreativesInput.value);
+            if (currentCreatives > maxCreatives) {
+                numCreativesInput.value = maxCreatives;
+                creativesValueEl.textContent = maxCreatives;
+                // Trigger input event to update slider position
+                numCreativesInput.dispatchEvent(new Event('input'));
+            } else {
+                // Always update the display value to match the current slider value
+                creativesValueEl.textContent = numCreativesInput.value;
+            }
+            // Update reports max based on campaigns
+            numReportsInput.max = parseInt(numCampaignsInput.value);
+            const currentReports = parseInt(numReportsInput.value);
+            if (currentReports > parseInt(numCampaignsInput.value)) {
+                numReportsInput.value = numCampaignsInput.value;
+                reportsValueEl.textContent = numCampaignsInput.value;
+                // Trigger input event to update slider position
+                numReportsInput.dispatchEvent(new Event('input'));
+            } else {
+                // Always update the display value to match the current slider value
+                reportsValueEl.textContent = numReportsInput.value;
+            }
+            
+            // Update data access max based on campaigns
+            numDataAccessInput.max = parseInt(numCampaignsInput.value);
+            const currentDataAccess = parseInt(numDataAccessInput.value);
+            if (currentDataAccess > parseInt(numCampaignsInput.value)) {
+                numDataAccessInput.value = numCampaignsInput.value;
+                dataAccessValueEl.textContent = numCampaignsInput.value;
+                // Trigger input event to update slider position
+                numDataAccessInput.dispatchEvent(new Event('input'));
+            } else {
+                // Always update the display value to match the current slider value
+                dataAccessValueEl.textContent = numDataAccessInput.value;
+            }
+            calculatePrice();
+        });
+
+        numCreativesInput.addEventListener('input', () => {
+            creativesValueEl.textContent = numCreativesInput.value;
+            calculatePrice();
+        });
+
+        numReportsInput.addEventListener('input', () => {
+            reportsValueEl.textContent = numReportsInput.value;
+            
+            // Validate that reports + data access doesn't exceed campaigns
+            const campaigns = parseInt(numCampaignsInput.value);
+            const reports = parseInt(numReportsInput.value);
+            const dataAccess = parseInt(numDataAccessInput.value);
+            
+            if (reports + dataAccess > campaigns) {
+                // If total exceeds campaigns, adjust data access down
+                const maxDataAccess = Math.max(0, campaigns - reports);
+                numDataAccessInput.value = maxDataAccess;
+                dataAccessValueEl.textContent = maxDataAccess;
+            }
+            
+            calculatePrice();
+        });
+
+        numDataAccessInput.addEventListener('input', () => {
+            dataAccessValueEl.textContent = numDataAccessInput.value;
+            
+            // Validate that reports + data access doesn't exceed campaigns
+            const campaigns = parseInt(numCampaignsInput.value);
+            const reports = parseInt(numReportsInput.value);
+            const dataAccess = parseInt(numDataAccessInput.value);
+            
+            if (reports + dataAccess > campaigns) {
+                // If total exceeds campaigns, adjust reports down
+                const maxReports = Math.max(0, campaigns - dataAccess);
+                numReportsInput.value = maxReports;
+                reportsValueEl.textContent = maxReports;
+            }
+            
+            calculatePrice();
+        });
+
+        paymentTermSelect.addEventListener('change', calculatePrice);
+        
+        // Initialize max values and credit price display on page load
+        updateCreditPriceDisplay();
+        numCampaignsInput.dispatchEvent(new Event('input'));
+        calculatePrice();
+
+        // Tooltip functionality
+        let tooltip = null;
+        let activeTooltip = null;
+
+        function createTooltip() {
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                document.body.appendChild(tooltip);
+            }
+            return tooltip;
+        }
+
+        function showTooltip(element, text, event) {
+            const tooltip = createTooltip();
+            tooltip.textContent = text;
+            tooltip.style.left = (event.clientX + 10) + 'px';
+            tooltip.style.top = (event.clientY - 10) + 'px';
+            tooltip.classList.add('show');
+            activeTooltip = element;
+        }
+
+        function hideTooltip() {
+            if (tooltip) {
+                tooltip.classList.remove('show');
+            }
+            activeTooltip = null;
+        }
+
+        // Add event listeners to tooltip triggers
+        document.querySelectorAll('.tooltip-trigger').forEach(trigger => {
+            trigger.addEventListener('mouseenter', (e) => {
+                const tooltipText = trigger.getAttribute('data-tooltip');
+                showTooltip(trigger, tooltipText, e);
+            });
+
+            trigger.addEventListener('mouseleave', () => {
+                hideTooltip();
+            });
+
+            trigger.addEventListener('mousemove', (e) => {
+                if (activeTooltip === trigger && tooltip) {
+                    tooltip.style.left = (e.clientX + 10) + 'px';
+                    tooltip.style.top = (e.clientY - 10) + 'px';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1405 @@
+<!-- [Attributes by Finsweet] CMS Load -->
+<script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsload@1/cmsload.js"></script>
+
+<style></style>
+:root {
+--navy: #1e293b;
+--blue1: #2563eb;
+--blue2: #1e40af;
+--white: #fff;
+--light-gray: #f8f9fa;
+--border-color: #e5e7eb;
+--accent: #4a3aff;
+--shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.blog-listing-section {
+padding: 100px 0;
+background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.section-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.section-title {
+font-size: 3rem;
+font-weight: 800;
+color: var(--navy);
+margin-bottom: 20px;
+line-height: 1.2;
+}
+
+.section-subtitle {
+font-size: 1.2rem;
+color: var(--navy);
+opacity: 0.7;
+max-width: 600px;
+margin: 0 auto;
+}
+
+/* Filter UI */
+.filter-container {
+background: var(--white);
+border-radius: 16px;
+padding: 32px;
+margin-bottom: 48px;
+box-shadow: var(--shadow);
+border: 1px solid var(--border-color);
+}
+
+.filter-row {
+display: flex;
+gap: 24px;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.filter-group {
+flex: 1;
+min-width: 200px;
+}
+
+.filter-label {
+display: block;
+font-weight: 600;
+color: var(--navy);
+margin-bottom: 8px;
+font-size: 0.9rem;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.filter-select {
+width: 100%;
+padding: 12px 16px;
+border: 2px solid var(--border-color);
+border-radius: 8px;
+font-size: 1rem;
+font-family: inherit;
+background: var(--white);
+color: var(--navy);
+transition: all 0.3s ease;
+cursor: pointer;
+}
+
+.filter-select:focus {
+outline: none;
+border-color: var(--blue1);
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Results info */
+.results-info {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 32px;
+padding: 0 4px;
+}
+
+.results-count {
+font-size: 1rem;
+color: var(--navy);
+opacity: 0.7;
+}
+
+.clear-filters {
+background: none;
+border: none;
+color: var(--blue1);
+font-size: 0.9rem;
+font-weight: 600;
+cursor: pointer;
+padding: 8px 16px;
+border-radius: 6px;
+transition: all 0.3s ease;
+text-decoration: underline;
+}
+
+.clear-filters:hover {
+background: rgba(37, 99, 235, 0.1);
+text-decoration: none;
+}
+
+/* Blog posts grid */
+.blog-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+gap: 32px;
+}
+
+.blog-post {
+background: var(--white);
+border-radius: 16px;
+overflow: hidden;
+box-shadow: var(--shadow);
+border: 1px solid var(--border-color);
+transition: all 0.3s ease;
+opacity: 1;
+transform: scale(1);
+}
+
+.blog-post.hidden {
+opacity: 0;
+transform: scale(0.95);
+pointer-events: none;
+}
+
+.blog-post:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 32px rgba(37, 99, 235, 0.12);
+}
+
+.blog-post-image {
+width: 100%;
+height: 240px;
+overflow: hidden;
+position: relative;
+}
+
+.blog-post-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.3s ease;
+}
+
+.blog-post:hover .blog-post-image img {
+transform: scale(1.05);
+}
+
+.blog-post-category {
+position: absolute;
+top: 16px;
+left: 16px;
+background: var(--blue1);
+color: var(--white);
+padding: 6px 12px;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.blog-post-content {
+padding: 24px;
+}
+
+.blog-post-date {
+font-size: 0.85rem;
+color: var(--navy);
+opacity: 0.6;
+margin-bottom: 12px;
+font-weight: 500;
+}
+
+.blog-post-title {
+font-size: 1.4rem;
+font-weight: 700;
+color: var(--navy);
+margin-bottom: 12px;
+line-height: 1.3;
+}
+
+.blog-post-summary {
+font-size: 1rem;
+color: var(--navy);
+opacity: 0.8;
+line-height: 1.6;
+margin-bottom: 20px;
+}
+
+.blog-post-link {
+display: inline-flex;
+align-items: center;
+color: var(--blue1);
+font-weight: 600;
+text-decoration: none;
+font-size: 0.9rem;
+transition: all 0.3s ease;
+}
+
+.blog-post-link:hover {
+color: var(--blue2);
+transform: translateX(4px);
+}
+
+.blog-post-link::after {
+content: '→';
+margin-left: 6px;
+transition: transform 0.3s ease;
+}
+
+.blog-post-link:hover::after {
+transform: translateX(4px);
+}
+
+/* No results state */
+.no-results {
+text-align: center;
+padding: 80px 20px;
+color: var(--navy);
+opacity: 0.6;
+}
+
+.no-results-icon {
+font-size: 3rem;
+margin-bottom: 20px;
+opacity: 0.3;
+}
+
+.no-results-title {
+font-size: 1.5rem;
+font-weight: 600;
+margin-bottom: 12px;
+}
+
+.no-results-text {
+font-size: 1rem;
+max-width: 400px;
+margin: 0 auto;
+}
+
+/* Category Selection Modal */
+.category-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(30, 41, 59, 0.95);
+backdrop-filter: blur(8px);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transition: all 0.4s ease;
+}
+
+.category-modal.active {
+opacity: 1;
+visibility: visible;
+}
+
+.category-modal-content {
+background: var(--white);
+border-radius: 24px;
+padding: 48px;
+max-width: 500px;
+width: 90%;
+text-align: center;
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+transform: scale(0.9);
+transition: transform 0.4s ease;
+}
+
+.category-modal.active .category-modal-content {
+transform: scale(1);
+}
+
+.category-modal-title {
+font-size: 2rem;
+font-weight: 700;
+color: var(--navy);
+margin-bottom: 16px;
+line-height: 1.2;
+}
+
+.category-modal-subtitle {
+font-size: 1.1rem;
+color: var(--navy);
+opacity: 0.7;
+margin-bottom: 32px;
+line-height: 1.6;
+}
+
+.category-options {
+display: grid;
+gap: 16px;
+margin-bottom: 32px;
+}
+
+.category-option {
+background: var(--light-gray);
+border: 2px solid transparent;
+border-radius: 12px;
+padding: 20px;
+cursor: pointer;
+transition: all 0.3s ease;
+text-align: left;
+}
+
+.category-option:hover {
+background: var(--white);
+border-color: var(--blue1);
+transform: translateY(-2px);
+box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+}
+
+.category-option.selected {
+background: linear-gradient(135deg, var(--blue1), var(--blue2));
+color: var(--white);
+border-color: var(--blue1);
+}
+
+.category-option.selected .category-option-title {
+color: var(--white);
+}
+
+.category-option-title {
+font-size: 1.1rem;
+font-weight: 600;
+color: var(--navy);
+margin-bottom: 8px;
+transition: color 0.3s ease;
+}
+
+.category-option-description {
+font-size: 0.9rem;
+opacity: 0.8;
+line-height: 1.5;
+}
+
+.category-modal-actions {
+display: flex;
+gap: 16px;
+justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+padding: 14px 28px;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+border: none;
+font-family: inherit;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, var(--blue1), var(--blue2));
+color: var(--white);
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+background: var(--light-gray);
+color: var(--navy);
+}
+
+.btn-secondary:hover {
+background: var(--border-color);
+}
+
+.btn-primary:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+box-shadow: none;
+}
+
+/* Finsweet CMS Load Button */
+[fs-cmsload-element="button"] {
+background: linear-gradient(135deg, var(--blue1), var(--blue2));
+color: var(--white);
+border: none;
+padding: 14px 28px;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: inherit;
+}
+
+[fs-cmsload-element="button"]:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+}
+
+[fs-cmsload-element="button"]:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+.blog-grid {
+grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+gap: 24px;
+}
+}
+
+@media (max-width: 768px) {
+.blog-listing-section {
+padding: 80px 0;
+}
+
+.section-title {
+font-size: 2.5rem;
+}
+
+.filter-container {
+padding: 24px;
+margin-bottom: 32px;
+}
+
+.filter-row {
+flex-direction: column;
+gap: 20px;
+}
+
+.filter-group {
+min-width: auto;
+}
+
+.blog-grid {
+grid-template-columns: 1fr;
+gap: 24px;
+}
+
+.blog-post-content {
+padding: 20px;
+}
+}
+
+@media (max-width: 480px) {
+.blog-listing-section {
+padding: 60px 0;
+}
+
+.section-title {
+font-size: 2rem;
+}
+
+.filter-container {
+padding: 20px;
+}
+
+.blog-post-image {
+height: 200px;
+}
+
+.blog-post-content {
+padding: 18px;
+}
+
+.blog-post-title {
+font-size: 1.2rem;
+}
+
+.category-modal-content {
+padding: 32px 24px;
+margin: 20px;
+}
+
+.category-modal-title {
+font-size: 1.6rem;
+}
+
+.category-modal-subtitle {
+font-size: 1rem;
+}
+
+.category-option {
+padding: 16px;
+}
+
+.category-modal-actions {
+flex-direction: column;
+gap: 12px;
+}
+
+.btn-primary,
+.btn-secondary {
+width: 100%;
+padding: 16px 24px;
+}
+}
+</style>
+
+<div class="blog-listing-section">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2 class="section-title">Latest Insights</h2>
+            <p class="section-subtitle">Discover strategies, tips, and insights to optimize your creative performance
+            </p>
+        </div>
+
+        <!-- Category Selection Modal -->
+        <div class="category-modal" id="category-modal">
+            <div class="category-modal-content">
+                <h3 class="category-modal-title">I am interested in...</h3>
+                <p class="category-modal-subtitle">Choose a category to see personalized content recommendations</p>
+
+                <div class="category-options" id="category-options">
+                    <!-- Categories will be populated dynamically -->
+                </div>
+
+                <div class="category-modal-actions">
+                    <button class="btn-secondary" id="skip-categories">Show All Content</button>
+                    <button class="btn-primary" id="continue-with-category" disabled>Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter UI -->
+        <div class="filter-container">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="category-filter" class="filter-label">Category</label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <!-- Categories will be populated dynamically -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Info -->
+        <div class="results-info">
+            <div class="results-count" id="results-count">Loading posts...</div>
+            <button class="clear-filters" id="clear-filters" style="display: none;">Clear Filters</button>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div class="blog-grid" id="blog-grid" fs-cmsload-element="list">
+            <!-- Posts will be populated dynamically from Webflow CMS -->
+            <!-- Your Webflow collection list should be placed here with fs-cmsload-element="list" -->
+        </div>
+
+        <!-- Load More Button (will be automatically handled by Finsweet) -->
+        <div style="text-align: center; margin-top: 40px;">
+            <button fs-cmsload-element="button" class="btn-primary" style="display: none;">
+                Load More Posts
+            </button>
+        </div>
+
+        <!-- No Results State -->
+        <div class="no-results" id="no-results" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3 class="no-results-title">No posts found</h3>
+            <p class="no-results-text">Try adjusting your category filter or browse all categories</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Blog Listing Filter System
+    class BlogListingFilter {
+        constructor() {
+            this.posts = [];
+            this.filteredPosts = [];
+            this.categories = new Set();
+            this.currentFilters = {
+                category: ''
+            };
+            this.selectedCategory = null;
+            this.hasShownModal = false;
+
+            this.init();
+        }
+
+        init() {
+            this.loadPosts();
+            this.setupEventListeners();
+            this.checkFirstVisit();
+
+            // Debug mode - log DOM structure for first post
+            this.debugMode = window.location.search.includes('debug=true');
+        }
+
+        // Load posts from Webflow CMS
+        loadPosts() {
+            console.log('Starting to load posts...');
+
+            // Initialize all categories from your CSV data first
+            this.initializeAllCategories();
+
+            // Wait for Finsweet CMS Load to be ready
+            this.waitForFinsweet();
+        }
+
+        // Wait for Finsweet CMS Load to initialize
+        waitForFinsweet() {
+            // Check if Finsweet CMS Load is available
+            if (window.fsAttributes && window.fsAttributes.cmsload) {
+                console.log('Finsweet CMS Load detected, waiting for initialization...');
+
+                // Wait for Finsweet to load all posts
+                window.fsAttributes.cmsload.init().then(() => {
+                    console.log('Finsweet CMS Load initialized, extracting posts...');
+
+                    // Set up listener for when more posts are loaded
+                    this.setupFinsweet();
+
+                    // Wait a bit more for DOM to be fully updated
+                    setTimeout(() => {
+                        this.extractPostsFromDOM();
+                    }, 500);
+                });
+            } else {
+                console.log('Finsweet not detected, using fallback method...');
+                // Fallback to original method
+                if (window.Webflow) {
+                    window.Webflow.push(() => {
+                        this.extractPostsFromDOM();
+                    });
+                } else {
+                    setTimeout(() => {
+                        this.extractPostsFromDOM();
+                    }, 1000);
+                }
+            }
+        }
+
+        // Setup Finsweet event listeners
+        setupFinsweet() {
+            // Listen for when more posts are loaded
+            const loadButton = document.querySelector('[fs-cmsload-element="button"]');
+            if (loadButton) {
+                loadButton.addEventListener('click', () => {
+                    // Wait for new posts to be loaded, then re-extract
+                    setTimeout(() => {
+                        console.log('More posts loaded, re-extracting...');
+                        this.extractPostsFromDOM();
+                    }, 1000);
+                });
+            }
+
+            // Also listen for any DOM changes in the collection list
+            const observer = new MutationObserver((mutations) => {
+                let shouldReExtract = false;
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        // Check if new collection items were added
+                        for (let node of mutation.addedNodes) {
+                            if (node.nodeType === 1 && (node.classList.contains('w-dyn-item') || node.querySelector('.w-dyn-item'))) {
+                                shouldReExtract = true;
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                if (shouldReExtract) {
+                    console.log('New posts detected via MutationObserver, re-extracting...');
+                    setTimeout(() => {
+                        this.extractPostsFromDOM();
+                    }, 500);
+                }
+            });
+
+            // Observe the blog grid for changes
+            const blogGrid = document.getElementById('blog-grid');
+            if (blogGrid) {
+                observer.observe(blogGrid, { childList: true, subtree: true });
+            }
+        }
+
+        // Initialize all categories from your CSV data
+        initializeAllCategories() {
+            // Add all categories from your CSV data
+            const allCategories = [
+                'Advertising',
+                'Marketing',
+                'Insights',
+                'Creator Economy',
+                'Market Research',
+                'Influencer Marketing',
+                'Product',
+                'AI'
+            ];
+
+            allCategories.forEach(category => {
+                this.categories.add(category);
+            });
+
+            console.log('Initialized categories:', Array.from(this.categories));
+
+            // Populate the UI immediately
+            this.populateCategories();
+        }
+
+
+
+        // Extract posts from Webflow's rendered DOM
+        extractPostsFromDOM() {
+            console.log('Extracting posts from DOM...');
+
+            // Try multiple selectors to find blog posts
+            let postElements = [];
+
+            // Try various collection selectors
+            const collectionSelectors = [
+                '.collection-list.w-dyn-items',
+                '.w-dyn-items',
+                '.collection-list',
+                '[data-wf-collection-type="blog"]',
+                '.blog-collection',
+                '.posts-collection'
+            ];
+
+            for (let selector of collectionSelectors) {
+                const collectionList = document.querySelector(selector);
+                if (collectionList) {
+                    postElements = collectionList.querySelectorAll('[role="listitem"].w-dyn-item, .w-dyn-item');
+                    console.log(`Found ${postElements.length} blog posts in ${selector}`);
+                    if (postElements.length > 0) break;
+                }
+            }
+
+            // If no posts found, try direct selectors
+            if (postElements.length === 0) {
+                console.log('Collection list not found, trying direct selectors...');
+                const directSelectors = [
+                    '[role="listitem"].w-dyn-item',
+                    '.w-dyn-item',
+                    '[data-w-id*="blog"]',
+                    '.blog-item',
+                    '.post-item',
+                    '.article-item',
+                    '[data-wf-collection-item]'
+                ];
+
+                for (let selector of directSelectors) {
+                    postElements = document.querySelectorAll(selector);
+                    console.log(`Trying ${selector}: found ${postElements.length} elements`);
+                    if (postElements.length > 0) break;
+                }
+            }
+
+            // Log what we found for debugging
+            console.log(`Total elements found: ${postElements.length}`);
+            if (postElements.length > 0) {
+                console.log('First element:', postElements[0]);
+                console.log('First element HTML:', postElements[0].outerHTML.substring(0, 200) + '...');
+            }
+
+            // If still no posts, wait and try again (up to 3 times)
+            if (postElements.length === 0) {
+                this.extractionAttempts = (this.extractionAttempts || 0) + 1;
+                if (this.extractionAttempts < 3) {
+                    console.log(`No posts found, attempt ${this.extractionAttempts}/3. Waiting 3 seconds and trying again...`);
+                    setTimeout(() => {
+                        this.extractPostsFromDOM();
+                    }, 3000);
+                    return;
+                } else {
+                    console.error('Failed to find any blog posts after 3 attempts');
+                    // Show error message to user
+                    document.getElementById('results-count').textContent = 'No blog posts found. Please check your Webflow collection setup.';
+                    return;
+                }
+            }
+
+            this.processPostElements(postElements);
+        }
+
+        // Debug function to help identify Webflow structure
+        debugPostStructure(element) {
+            if (!this.debugMode) return;
+
+            console.log('=== DEBUG: Post Element Structure ===');
+            console.log('Element:', element);
+            console.log('HTML:', element.outerHTML);
+            console.log('All text content:', element.textContent);
+            console.log('Data attributes:', Array.from(element.attributes).filter(attr => attr.name.startsWith('data-')));
+            console.log('All child elements with text:', Array.from(element.querySelectorAll('*')).filter(el => el.textContent.trim()).map(el => ({
+                tagName: el.tagName,
+                className: el.className,
+                textContent: el.textContent.trim(),
+                attributes: Array.from(el.attributes).map(attr => `${attr.name}="${attr.value}"`).join(' ')
+            })));
+            console.log('=====================================');
+        }
+
+        // Process the found post elements
+        processPostElements(postElements) {
+            this.posts = Array.from(postElements).map((element, index) => {
+                // Debug first post structure
+                if (index === 0) {
+                    this.debugPostStructure(element);
+                }
+                // Extract data from the DOM elements - try multiple selectors
+                const titleElement = element.querySelector('h4[data-has-binding-on-children="true"]') ||
+                    element.querySelector('h3') ||
+                    element.querySelector('h2') ||
+                    element.querySelector('.title, .post-title, .blog-title');
+
+                const dateElement = element.querySelector('.combine-blog4_date[data-has-binding-on-children="true"]') ||
+                    element.querySelector('.date, .post-date, .publish-date') ||
+                    element.querySelector('[data-wf-collection-item-field="publish-date"]');
+
+                const summaryElement = element.querySelector('.combine-blog4_paragraph[data-has-binding-on-children="true"]') ||
+                    element.querySelector('.summary, .excerpt, .description') ||
+                    element.querySelector('p');
+
+                const imageElement = element.querySelector('.combine-blog4_image') ||
+                    element.querySelector('img') ||
+                    element.querySelector('.image, .post-image, .blog-image');
+
+                const linkElement = element.querySelector('a[href*="/blog-post/"]') ||
+                    element.querySelector('a[href*="/blog/"]') ||
+                    element.querySelector('a');
+
+                // Extract the actual values
+                const title = titleElement ? titleElement.textContent.trim() : `Post ${index + 1}`;
+                const date = dateElement ? dateElement.textContent.trim() : '';
+                const summary = summaryElement ? summaryElement.textContent.trim() : '';
+                const image = imageElement ? (imageElement.src || imageElement.getAttribute('data-src') || '') : '';
+                const slug = linkElement ? this.extractSlugFromURL(linkElement.href) : '';
+
+                // Try to extract category from the element or use a default
+                let category = this.extractCategoryFromElement(element);
+
+                // If category extraction failed, try to infer from URL or title
+                if (category === 'General' && (slug || title)) {
+                    category = this.inferCategoryFromContent(slug, title, summary) || 'General';
+                }
+
+                console.log(`Processing post ${index + 1}:`, { title, category, date, slug });
+
+                return {
+                    id: `post-${index}`,
+                    title: title,
+                    slug: slug,
+                    category: category,
+                    image: image,
+                    summary: summary,
+                    content: summary, // Use summary as content for now
+                    publishDate: this.parseDate(date)
+                };
+            });
+
+            this.filteredPosts = [...this.posts];
+            this.renderPosts();
+            this.updateResultsCount();
+
+            // Add any new categories found in posts to our existing set
+            this.posts.forEach(post => {
+                if (post.category && post.category !== 'General') {
+                    this.categories.add(post.category);
+                }
+            });
+
+            // Update the UI with any new categories
+            this.updateCategoryUI();
+        }
+
+        // Extract slug from blog post URL
+        extractSlugFromURL(url) {
+            const match = url.match(/\/blog-post\/([^\/]+)/);
+            return match ? match[1] : '';
+        }
+
+        // Extract category from element (you can customize this based on your setup)
+        extractCategoryFromElement(element) {
+            // Define all known categories from your CSV data
+            const knownCategories = [
+                'advertising', 'marketing', 'insights', 'creator economy',
+                'market research', 'influencer marketing', 'product', 'ai'
+            ];
+
+            // Look for category indicators in the element - try multiple selectors
+            const categorySelectors = [
+                '[data-category]',
+                '.category',
+                '.tag',
+                '.combine-blog4_category',
+                '[data-wf-collection-item-field="category"]',
+                '.w-dyn-bind-empty[data-wf-bindings]',
+                '[data-wf-bindings*="category"]',
+                '.w-dyn-bind[data-wf-bindings]'
+            ];
+
+            for (let selector of categorySelectors) {
+                const categoryElement = element.querySelector(selector);
+                if (categoryElement) {
+                    const categoryText = categoryElement.textContent.trim().toLowerCase();
+                    if (categoryText && categoryText !== '') {
+                        // Check if it matches any known category
+                        for (let category of knownCategories) {
+                            if (categoryText === category || categoryText.includes(category)) {
+                                return this.formatCategoryName(category);
+                            }
+                        }
+                        // If it's not empty but doesn't match known categories, use it anyway
+                        return this.formatCategoryName(categoryText);
+                    }
+                }
+            }
+
+            // Try to extract from any text content that might contain category info
+            const allTextElements = element.querySelectorAll('*');
+            for (let textEl of allTextElements) {
+                const text = textEl.textContent.trim().toLowerCase();
+                // Skip very long text (likely content, not category)
+                if (text.length > 50) continue;
+
+                for (let category of knownCategories) {
+                    if (text === category) {
+                        return this.formatCategoryName(category);
+                    }
+                }
+            }
+
+            // Check all data attributes for category information
+            const allAttributes = Array.from(element.attributes);
+            for (let attr of allAttributes) {
+                const attrValue = attr.value.toLowerCase();
+                for (let category of knownCategories) {
+                    if (attrValue.includes(category)) {
+                        return this.formatCategoryName(category);
+                    }
+                }
+            }
+
+            // Check child elements recursively
+            const childElements = element.querySelectorAll('*');
+            for (let child of childElements) {
+                const childText = child.textContent.trim().toLowerCase();
+                if (childText.length <= 30) { // Only check short text that could be categories
+                    for (let category of knownCategories) {
+                        if (childText === category) {
+                            return this.formatCategoryName(category);
+                        }
+                    }
+                }
+            }
+
+            // If no category found, use default
+            return 'General';
+        }
+
+        // Format category name consistently
+        formatCategoryName(category) {
+            if (!category) return 'General';
+
+            // Handle special cases
+            const specialCases = {
+                'creator economy': 'Creator Economy',
+                'market research': 'Market Research',
+                'influencer marketing': 'Influencer Marketing',
+                'ai': 'AI'
+            };
+
+            const lowerCategory = category.toLowerCase();
+            if (specialCases[lowerCategory]) {
+                return specialCases[lowerCategory];
+            }
+
+            // Default formatting: capitalize first letter
+            return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+        }
+
+        // Infer category from content when DOM extraction fails
+        inferCategoryFromContent(slug, title, summary) {
+            const knownCategories = [
+                'advertising', 'marketing', 'insights', 'creator economy',
+                'market research', 'influencer marketing', 'product', 'ai'
+            ];
+
+            const contentToCheck = `${slug} ${title} ${summary}`.toLowerCase();
+
+            // Check for category keywords in content
+            const categoryKeywords = {
+                'advertising': ['ad', 'ads', 'advertising', 'campaign', 'creative', 'brand'],
+                'marketing': ['marketing', 'strategy', 'promotion', 'audience', 'engagement'],
+                'insights': ['insight', 'analysis', 'data', 'research', 'study', 'findings'],
+                'creator economy': ['creator', 'influencer', 'content creator', 'social media'],
+                'market research': ['research', 'survey', 'study', 'market', 'consumer'],
+                'influencer marketing': ['influencer', 'collaboration', 'partnership', 'sponsored'],
+                'product': ['product', 'development', 'launch', 'feature', 'design'],
+                'ai': ['ai', 'artificial intelligence', 'machine learning', 'automation']
+            };
+
+            for (let category of knownCategories) {
+                const keywords = categoryKeywords[category] || [category];
+                for (let keyword of keywords) {
+                    if (contentToCheck.includes(keyword)) {
+                        return this.formatCategoryName(category);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        // Parse date from various formats
+        parseDate(dateString) {
+            if (!dateString) return new Date().toISOString();
+
+            // Try to parse common date formats
+            const date = new Date(dateString);
+            if (!isNaN(date.getTime())) {
+                return date.toISOString();
+            }
+
+            // If parsing fails, return current date
+            return new Date().toISOString();
+        }
+
+        // Extract categories from posts
+        populateCategories() {
+            const categorySelect = document.getElementById('category-filter');
+
+            // Clear existing options (except "All Categories")
+            while (categorySelect.children.length > 1) {
+                categorySelect.removeChild(categorySelect.lastChild);
+            }
+
+            // Add all categories
+            this.categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
+
+            // Also populate the modal categories
+            this.populateModalCategories();
+        }
+
+        // Update category UI when new categories are found
+        updateCategoryUI() {
+            this.populateCategories();
+        }
+
+        // Populate category options in the modal
+        populateModalCategories() {
+            const categoryOptions = document.getElementById('category-options');
+
+            // Clear existing options
+            categoryOptions.innerHTML = '';
+
+            const categoryDescriptions = {
+                'Advertising': 'Understand advertising effectiveness and optimization',
+                'Marketing': 'Explore marketing strategies and best practices',
+                'Insights': 'Discover key insights and strategic perspectives',
+                'Creator Economy': 'Learn about creator trends and platform strategies',
+                'Market Research': 'Discover research methodologies and data insights',
+                'Influencer Marketing': 'Learn about influencer strategies and engagement',
+                'Product': 'Explore product development and market fit',
+                'AI': 'Discover AI applications and automation insights',
+                'General': 'Explore various topics and insights'
+            };
+
+            this.categories.forEach(category => {
+                const option = document.createElement('div');
+                option.className = 'category-option';
+                option.dataset.category = category;
+
+                option.innerHTML = `
+                    <div class="category-option-title">${category}</div>
+                    <div class="category-option-description">${categoryDescriptions[category] || 'Explore insights and strategies'}</div>
+                `;
+
+                option.addEventListener('click', () => this.selectCategory(category));
+                categoryOptions.appendChild(option);
+            });
+        }
+
+        // Check if this is the first visit
+        checkFirstVisit() {
+            const hasVisited = localStorage.getItem('blog-category-selected');
+
+            if (!hasVisited && this.categories.size > 0) {
+                this.showCategoryModal();
+            } else {
+                // Hide the modal and show the blog interface
+                this.hideCategoryModal();
+            }
+        }
+
+        // Show the category selection modal
+        showCategoryModal() {
+            const modal = document.getElementById('category-modal');
+            modal.classList.add('active');
+            this.hasShownModal = true;
+        }
+
+        // Hide the category selection modal
+        hideCategoryModal() {
+            const modal = document.getElementById('category-modal');
+            modal.classList.remove('active');
+        }
+
+        // Handle category selection in modal
+        selectCategory(category) {
+            // Remove previous selection
+            document.querySelectorAll('.category-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Select new category
+            const selectedOption = document.querySelector(`[data-category="${category}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+
+            this.selectedCategory = category;
+
+            // Enable continue button
+            document.getElementById('continue-with-category').disabled = false;
+        }
+
+        // Setup event listeners
+        setupEventListeners() {
+            document.getElementById('category-filter').addEventListener('change', (e) => {
+                this.currentFilters.category = e.target.value;
+                this.filterPosts();
+            });
+
+            document.getElementById('clear-filters').addEventListener('click', () => {
+                this.clearFilters();
+            });
+
+            // Modal event listeners
+            document.getElementById('continue-with-category').addEventListener('click', () => {
+                this.continueWithCategory();
+            });
+
+            document.getElementById('skip-categories').addEventListener('click', () => {
+                this.skipCategorySelection();
+            });
+        }
+
+        // Filter posts based on current criteria
+        filterPosts() {
+            this.filteredPosts = this.posts.filter(post => {
+                const matchesCategory = !this.currentFilters.category ||
+                    post.category === this.currentFilters.category;
+
+                return matchesCategory;
+            });
+
+            this.renderPosts();
+            this.updateResultsCount();
+            this.toggleClearFilters();
+        }
+
+        // Render filtered posts
+        renderPosts() {
+            const grid = document.getElementById('blog-grid');
+            const noResults = document.getElementById('no-results');
+
+            if (this.filteredPosts.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                grid.style.display = 'grid';
+                noResults.style.display = 'none';
+
+                grid.innerHTML = this.filteredPosts.map(post => this.createPostHTML(post)).join('');
+            }
+        }
+
+        // Create HTML for individual post
+        createPostHTML(post) {
+            const date = new Date(post.publishDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            return `
+                <article class="blog-post" data-category="${post.category}">
+                    <div class="blog-post-image">
+                        <img src="${post.image}" alt="${post.title}" loading="lazy">
+                        <span class="blog-post-category">${post.category}</span>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-date">${date}</div>
+                        <h3 class="blog-post-title">${post.title}</h3>
+                        <p class="blog-post-summary">${post.summary}</p>
+                        <a href="/blog/${post.slug}" class="blog-post-link">Read More</a>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Update results count
+        updateResultsCount() {
+            const count = this.filteredPosts.length;
+            const total = this.posts.length;
+            const resultsCount = document.getElementById('results-count');
+
+            if (this.hasActiveFilters()) {
+                resultsCount.innerHTML = `Showing ${count} of ${total} posts`;
+            } else {
+                resultsCount.innerHTML = `${total} posts <small style="opacity: 0.6;">(Powered by Finsweet CMS Load)</small>`;
+            }
+        }
+
+        // Check if any filters are active
+        hasActiveFilters() {
+            return this.currentFilters.category;
+        }
+
+        // Toggle clear filters button
+        toggleClearFilters() {
+            const clearButton = document.getElementById('clear-filters');
+            clearButton.style.display = this.hasActiveFilters() ? 'block' : 'none';
+        }
+
+        // Clear all filters
+        clearFilters() {
+            this.currentFilters = { category: '' };
+
+            document.getElementById('category-filter').value = '';
+
+            this.filterPosts();
+        }
+
+        // Continue with selected category
+        continueWithCategory() {
+            if (this.selectedCategory) {
+                // Set the category filter
+                this.currentFilters.category = this.selectedCategory;
+                document.getElementById('category-filter').value = this.selectedCategory;
+
+                // Hide modal and show filtered results
+                this.hideCategoryModal();
+
+                // Apply the filter
+                this.filterPosts();
+
+                // Mark as visited
+                localStorage.setItem('blog-category-selected', 'true');
+
+                // Show a welcome message
+                this.showWelcomeMessage();
+            }
+        }
+
+        // Skip category selection
+        skipCategorySelection() {
+            // Hide modal and show all content
+            this.hideCategoryModal();
+
+            // Mark as visited
+            localStorage.setItem('blog-category-selected', 'true');
+
+            // Show all posts
+            this.filterPosts();
+        }
+
+        // Show welcome message for selected category
+        showWelcomeMessage() {
+            const resultsInfo = document.querySelector('.results-info');
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = 'welcome-message';
+            welcomeMessage.innerHTML = `
+                <div style="background: linear-gradient(135deg, var(--blue1), var(--blue2)); color: white; padding: 16px 24px; border-radius: 12px; margin-bottom: 24px; text-align: center;">
+                    <strong>Welcome!</strong> Here are the latest insights about <strong>${this.selectedCategory}</strong>
+                </div>
+            `;
+
+            resultsInfo.parentNode.insertBefore(welcomeMessage, resultsInfo);
+
+            // Remove welcome message after 5 seconds
+            setTimeout(() => {
+                if (welcomeMessage.parentNode) {
+                    welcomeMessage.parentNode.removeChild(welcomeMessage);
+                }
+            }, 5000);
+        }
+
+        // Method to add new filters (for future expansion)
+        addFilter(filterName, filterType, options = {}) {
+            // This method allows easy addition of new filters
+            // Example: this.addFilter('tags', 'multi-select', { options: ['tag1', 'tag2'] })
+            // Example: this.addFilter('author', 'single-select', { options: ['author1', 'author2'] })
+            // Example: this.addFilter('dateRange', 'date-range', { minDate: '2023-01-01', maxDate: '2024-12-31' })
+
+            console.log(`Adding new filter: ${filterName} of type: ${filterType}`, options);
+
+            // Implementation would go here based on filter type
+            // This provides a clean interface for future filter additions
+        }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        new BlogListingFilter();
+    });
+
+    // Webflow CMS Integration Notes:
+    //
+    // 1. Replace the empty posts array in loadPosts() with Webflow's CMS data
+    // 2. Webflow will inject the posts data when the page loads
+    // 3. The data structure should match:
+    //    - id: unique identifier
+    //    - title: post title
+    //    - slug: URL slug
+    //    - category: category name
+    //    - image: image URL
+    //    - summary: post summary/excerpt
+    //    - content: full post content
+    //    - publishDate: ISO date string
+    //
+    // 4. The filter system will automatically work with the CMS data
+    // 5. Categories will be automatically extracted and populated
+    // 6. All filtering happens client-side for instant results
+</script>
+<! -- FINSWEET CMS LOAD SETUP INSTRUCTIONS:=====================================1. ADD FINSWEET SCRIPT TO YOUR WEBFLOW
+    PROJECT: - Go to your Webflow project settings - Navigate to Custom Code> Head Code
+    - Add this script:
+    <script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsload@1/cmsload.js"></script>
+
+    2. CONFIGURE YOUR COLLECTION LIST IN WEBFLOW:
+    - Select your Collection List element in the Designer
+    - In the Element Settings panel, add these custom attributes:
+    * Attribute: fs-cmsload-element
+    * Value: list
+
+    3. ENABLE PAGINATION IN COLLECTION SETTINGS:
+    - Select your Collection List
+    - In Collection List Settings, set "Items to show" to your desired initial number (e.g., 6)
+    - Enable "Show pagination"
+    - Choose "Load more button" as pagination type
+
+    4. STYLE THE LOAD MORE BUTTON (Optional):
+    - The button will automatically appear with the class [fs-cmsload-element="button"]
+    - It's already styled in this code, but you can customize further
+
+    5. CATEGORY FIELD SETUP:
+    - Make sure your CMS collection has a "Category" field
+    - The field should contain values like: advertising, marketing, insights, etc.
+    - The script will automatically detect and extract these categories
+
+    6. TESTING:
+    - Add ?debug=true to your URL to see console logs
+    - The script will now load ALL your blog posts, not just the first 6
+    - Categories will be extracted from all loaded posts
+    - Filtering will work across all posts
+
+    TROUBLESHOOTING:
+    - If posts aren't loading, check the browser console for errors
+    - Make sure the Finsweet script is loaded before this code runs
+    - Verify your collection list has the correct fs-cmsload-element="list" attribute
+    - Check that your CMS items have category data
+
+    For more info: https://finsweet.com/attributes/cms-load
+    -->

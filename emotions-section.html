@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Human - Emotions Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .element-human-emotions * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .element-human-emotions {
+            font-family: inherit;
+            line-height: 1.6;
+            color: inherit;
+            background: inherit;
+        }
+
+        .element-human-emotions * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Emotions Section */
+        .emotions-section {
+            background: var(--white);
+            padding: 100px 0;
+        }
+
+        .emotions-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .emotions-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .emotions-subtitle {
+            font-size: 1.25rem;
+            color: var(--magenta);
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .emotions-description {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        .emotions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+
+        .emotion-card {
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .emotion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: var(--magenta);
+        }
+
+        .emotion-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .emotion-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .emotions-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .emotions-paragraph {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .emotions-highlight {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Button Styles - New Design */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--white);
+            color: #007aff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #007aff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
+        }
+
+        .cta-button:hover {
+            background: #007aff;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .emotions-title {
+                font-size: 2.5rem;
+            }
+
+            .emotions-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .emotions-description {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .emotions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 15px;
+                padding: 0 20px;
+            }
+
+            .emotion-card {
+                padding: 15px 10px;
+            }
+
+            .emotion-emoji {
+                font-size: 2rem;
+            }
+
+            .emotion-label {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .emotions-section {
+                padding: 60px 0;
+            }
+
+            .emotions-title {
+                font-size: 2rem;
+            }
+
+            .emotions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .emotion-card {
+                padding: 12px 8px;
+            }
+
+            .emotion-emoji {
+                font-size: 1.8rem;
+            }
+
+            .emotion-label {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="element-human-emotions">
+        <!-- Behavioral Learning Models Section -->
+        <section class="emotions-section">
+            <div class="container">
+                <div class="emotions-header">
+                    <h2 class="emotions-title">Behavioral Learning Models</h2>
+                    <p class="emotions-subtitle">The Science Behind Emotion</p>
+                    <p class="emotions-description">
+                        Element Human transforms emotion into a measurable catalyst for growth through advanced behavioral learning models. By leveraging Ekman's seven universal emotions, we reveal the unique emotional signature every creative leaves behind, empowering predictive insights that resonate across markets and demographics.
+                    </p>
+                </div>
+
+                <div class="emotions-content">
+                    <p class="emotions-paragraph">
+                        Here's how we decode the core drivers of human response:
+                    </p>
+                    
+                    <div class="emotions-grid">
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">😊</span>
+                            <div class="emotion-label">Happiness</div>
+                        </div>
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">😮</span>
+                            <div class="emotion-label">Surprise</div>
+                        </div>
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">😢</span>
+                            <div class="emotion-label">Sadness</div>
+                        </div>
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">😡</span>
+                            <div class="emotion-label">Anger</div>
+                        </div>
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">😱</span>
+                            <div class="emotion-label">Fear</div>
+                        </div>
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">🤢</span>
+                            <div class="emotion-label">Disgust</div>
+                        </div>
+                        <div class="emotion-card">
+                            <span class="emotion-emoji">😐</span>
+                            <div class="emotion-label">Neutral</div>
+                        </div>
+                    </div>
+
+                    <p class="emotions-paragraph">
+                        Each of these expressions is captured and analyzed at the respondent level through <span class="emotions-highlight">facial coding</span>, so you gain unmatched clarity into how audiences genuinely respond to your creative.
+                    </p>
+
+                    <p class="emotions-paragraph">
+                        Our science-first approach replaces guesswork with precise emotional intelligence, helping you understand exactly what motivates, moves, or even disengages your audience.
+                    </p>
+
+                    <a href="#" class="cta-button">Decode What Moves Them</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

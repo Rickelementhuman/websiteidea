@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What We Stand For Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .what-we-stand-for * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .what-we-stand-for {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* What We Stand For Section */
+        .what-we-stand-for-section {
+            background: var(--light-gray);
+            padding: 100px 0;
+        }
+
+        .what-we-stand-for-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .what-we-stand-for-text {
+            max-width: 500px;
+        }
+
+        .what-we-stand-for-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .what-we-stand-for-description {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+
+        .principles-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .principle-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .principle-header {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--magenta);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* Color variations per principle (brand colors) */
+        .principles-container .principle-card:nth-child(1) .principle-header {
+            background: var(--magenta);
+        }
+        .principles-container .principle-card:nth-child(2) .principle-header {
+            background: #00a0ff;
+        }
+        .principles-container .principle-card:nth-child(3) .principle-header {
+            background: var(--green);
+        }
+
+        .principle-card.expanded .principle-header {
+            border-radius: 16px 16px 0 0;
+        }
+
+        .principle-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--white);
+        }
+
+        .principle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--white);
+        }
+
+        .principle-card.expanded .principle-icon {
+            transform: rotate(180deg);
+        }
+
+        .principle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: var(--white);
+        }
+
+        .principle-card.expanded .principle-content {
+            max-height: 200px;
+            padding: 25px 30px;
+        }
+
+        .principle-description {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .what-we-stand-for-content {
+                gap: 60px;
+            }
+
+            .what-we-stand-for-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .what-we-stand-for-section {
+                padding: 80px 0;
+            }
+
+            .what-we-stand-for-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .what-we-stand-for-text {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .what-we-stand-for-title {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .what-we-stand-for-description {
+                font-size: 1.1rem;
+            }
+
+            .principles-container {
+                gap: 15px;
+            }
+
+            .principle-header {
+                padding: 20px 25px;
+            }
+
+            .principle-title {
+                font-size: 1.2rem;
+            }
+
+            .principle-card.expanded .principle-content {
+                padding: 20px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .what-we-stand-for-section {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .what-we-stand-for-title {
+                font-size: 2rem;
+            }
+
+            .what-we-stand-for-description {
+                font-size: 1rem;
+            }
+
+            .principle-header {
+                padding: 18px 20px;
+            }
+
+            .principle-title {
+                font-size: 1.1rem;
+            }
+
+            .principle-card.expanded .principle-content {
+                padding: 18px 20px;
+            }
+
+            .principle-description {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="what-we-stand-for">
+        <!-- What We Stand For Section -->
+        <section class="what-we-stand-for-section">
+            <div class="container">
+                <div class="what-we-stand-for-content">
+                    <div class="what-we-stand-for-text">
+                        <h2 class="what-we-stand-for-title">What We Stand For</h2>
+                        <p class="what-we-stand-for-description">
+                            At the core of Element Human are the 3 E's. Our principles for how we work with each other and with you.
+                        </p>
+                    </div>
+
+                    <div class="principles-container">
+                        <div class="principle-card" onclick="togglePrinciple(this)">
+                            <div class="principle-header">
+                                <h3 class="principle-title">Empathise</h3>
+                                <span class="principle-icon">▼</span>
+                            </div>
+                            <div class="principle-content">
+                                <p class="principle-description">
+                                    Listen and be heard. We actively listen, to clients, colleagues, and the data. We align, plan, and communicate clearly so insight becomes action.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="principle-card" onclick="togglePrinciple(this)">
+                            <div class="principle-header">
+                                <h3 class="principle-title">Empower</h3>
+                                <span class="principle-icon">▶</span>
+                            </div>
+                            <div class="principle-content">
+                                <p class="principle-description">
+                                    Enable growth and confidence. We provide the tools, insights, and support needed to make informed decisions and drive meaningful change.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="principle-card" onclick="togglePrinciple(this)">
+                            <div class="principle-header">
+                                <h3 class="principle-title">Engage</h3>
+                                <span class="principle-icon">▶</span>
+                            </div>
+                            <div class="principle-content">
+                                <p class="principle-description">
+                                    Connect and inspire action. We create meaningful interactions that drive engagement, build relationships, and foster long-term partnerships.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function togglePrinciple(card) {
+            // Close all other cards
+            const allCards = document.querySelectorAll('.principle-card');
+            allCards.forEach(otherCard => {
+                if (otherCard !== card) {
+                    otherCard.classList.remove('expanded');
+                    const otherIcon = otherCard.querySelector('.principle-icon');
+                    otherIcon.textContent = '▶';
+                }
+            });
+
+            // Toggle current card
+            const isExpanded = card.classList.contains('expanded');
+            const icon = card.querySelector('.principle-icon');
+            
+            if (isExpanded) {
+                card.classList.remove('expanded');
+                icon.textContent = '▶';
+            } else {
+                card.classList.add('expanded');
+                icon.textContent = '▼';
+            }
+        }
+
+        // Initialize with first card expanded
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstCard = document.querySelector('.principle-card');
+            if (firstCard) {
+                firstCard.classList.add('expanded');
+                const icon = firstCard.querySelector('.principle-icon');
+                icon.textContent = '▼';
+            }
+        });
+    </script>
+</body>
+</html> 

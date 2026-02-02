@@ -1,0 +1,72 @@
+import Link from 'next/link'
+
+export function Footer() {
+  const currentYear = new Date().getFullYear()
+
+  const footerLinks = {
+    Product: [
+      { label: 'Features', href: '/product' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'Science', href: '/science' },
+    ],
+    Company: [
+      { label: 'About Us', href: '/about' },
+      { label: 'Insights', href: '/insights' },
+      { label: 'Contact', href: '/meet-with-us' },
+    ],
+    Legal: [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
+    ],
+  }
+
+  return (
+    <footer className="glass-panel-dark border-t border-white/10">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Logo & Description */}
+          <div className="md:col-span-1">
+            <div className="text-2xl font-bold mb-4">
+              <span className="text-brand-magenta">Element</span>
+              <span className="text-brand-cyan"> Human</span>
+            </div>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Reveal the why behind every impression through behavioral science and emotion tracking.
+            </p>
+          </div>
+
+          {/* Links */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h3 className="text-white font-semibold mb-4">{category}</h3>
+              <ul className="space-y-2">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-white/70 hover:text-brand-cyan transition-colors text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-white/60 text-sm">
+              © {currentYear} Element Human Limited. All rights reserved.
+            </p>
+            <p className="text-white/60 text-sm">
+              7 Savoy Court, London, WC2R 0EX | Company No: 08587003
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

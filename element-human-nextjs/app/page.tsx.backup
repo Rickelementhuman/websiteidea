@@ -1,0 +1,29 @@
+import { HeroSection } from '@/components/sections/HeroSection'
+import { ValueProposition } from '@/components/sections/ValueProposition'
+import { ProductOverview } from '@/components/sections/ProductOverview'
+import { FunnelSection } from '@/components/sections/FunnelSection'
+import { EmotionsSection } from '@/components/sections/EmotionsSection'
+import { UseCasesSection } from '@/components/sections/UseCasesSection'
+import { ClientLogos } from '@/components/sections/ClientLogos'
+import { SSPSection } from '@/components/sections/SSPSection'
+import { GlobalReachSection } from '@/components/sections/GlobalReachSection'
+import { WhatWeStandForSection } from '@/components/sections/WhatWeStandForSection'
+import { Testimonials } from '@/components/sections/Testimonials'
+
+export default function HomePage() {
+  return (
+    <main>
+      <HeroSection />
+      <ValueProposition />
+      <ProductOverview />
+      <FunnelSection />
+      <EmotionsSection />
+      <UseCasesSection />
+      <ClientLogos />
+      <SSPSection />
+      <GlobalReachSection />
+      <WhatWeStandForSection />
+      <Testimonials />
+    </main>
+  )
+}

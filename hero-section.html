@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Human - Hero Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .element-human-hero * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .element-human-hero {
+            font-family: inherit;
+            line-height: 1.6;
+            color: inherit;
+            background: inherit;
+        }
+
+        .element-human-hero * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: #ffffff;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-section .Header,
+        .hero-section .tab-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Button Styles - New Design */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--white);
+            color: #007aff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #007aff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
+        }
+
+        .cta-button:hover {
+            background: #007aff;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0 60px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 60px 0 40px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="element-human-hero">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="Header">Every Impression Has a Story. We Reveal It.</h1>
+                <p class="tab-text">Most measurement tools tell you what happened. We tell you why. Element Human illuminates unseen moments, transforming your creative into something audiences never forget.</p>
+                <a href="#" class="cta-button">Reveal Why It Matters</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

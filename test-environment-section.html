@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Environment Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .test-environment * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .test-environment {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Test Environment Section */
+        .test-environment-section {
+            background: var(--white);
+            padding: 100px 0;
+        }
+
+        .test-environment-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .test-environment-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--violet);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .test-environment-description {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .mobile-mockups {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .mobile-mockup {
+            width: 280px;
+            height: 500px;
+            background: var(--white);
+            border-radius: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            border: 8px solid #333;
+        }
+
+        .mobile-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=600&fit=crop&crop=center');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Instagram Mockup */
+        .instagram-mockup .mobile-screen {
+            background-image: url('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=600&fit=crop&crop=center');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .instagram-header {
+            background: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .instagram-logo {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .instagram-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .instagram-icon {
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        .instagram-content {
+            padding: 20px;
+            background: var(--white);
+        }
+
+        .instagram-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .instagram-post {
+            background: #f0f0f0;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 15px;
+            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop&crop=center');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .post-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .instagram-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* TikTok Mockup */
+        .tiktok-mockup .mobile-screen {
+            background: #000;
+        }
+
+        .tiktok-header {
+            background: rgba(0,0,0,0.8);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tiktok-content {
+            height: 100%;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=600&fit=crop&crop=center');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tiktok-video {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-overlay {
+            position: absolute;
+            right: 15px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .video-stats {
+            text-align: center;
+            color: var(--white);
+        }
+
+        .video-stats .number {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .video-stats .label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .tiktok-text {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            right: 15px;
+            color: var(--white);
+        }
+
+        .tiktok-username {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .tiktok-caption {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .tiktok-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        /* YouTube Shorts Mockup */
+        .youtube-mockup .mobile-screen {
+            background: #000;
+        }
+
+        .youtube-header {
+            background: rgba(0,0,0,0.8);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .youtube-content {
+            height: 100%;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&crop=center');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .youtube-video {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .youtube-overlay {
+            position: absolute;
+            right: 15px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .youtube-text {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            right: 15px;
+            color: var(--white);
+        }
+
+        .youtube-username {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .youtube-caption {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .youtube-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .platform-label {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            background: var(--white);
+            padding: 8px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--light-gray);
+            white-space: nowrap;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .mobile-mockups {
+                gap: 30px;
+            }
+
+            .mobile-mockup {
+                width: 250px;
+                height: 450px;
+            }
+
+            .test-environment-title {
+                font-size: 3rem;
+            }
+
+            .platform-label {
+                font-size: 1rem;
+                padding: 6px 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .test-environment-section {
+                padding: 80px 0;
+            }
+
+            .test-environment-title {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .test-environment-description {
+                font-size: 1.1rem;
+            }
+
+            .mobile-mockups {
+                flex-direction: column;
+                align-items: center;
+                gap: 60px;
+            }
+
+            .mobile-mockup {
+                width: 280px;
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .test-environment-section {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .test-environment-title {
+                font-size: 2rem;
+            }
+
+            .test-environment-description {
+                font-size: 1rem;
+            }
+
+            .mobile-mockup {
+                width: 260px;
+                height: 480px;
+            }
+
+            .platform-label {
+                font-size: 0.9rem;
+                padding: 5px 12px;
+                bottom: -45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-environment">
+        <!-- Test Environment Section -->
+        <section class="test-environment-section">
+            <div class="container">
+                <div class="test-environment-header">
+                    <h2 class="test-environment-title">Test your creatives in your environment</h2>
+                    <p class="test-environment-description">
+                        Because content doesn't live in a vacuum, neither does our testing. We simulate real viewing environments so responses reflect real behavior.
+                    </p>
+                </div>
+
+                <div class="mobile-mockups">
+                    <!-- Instagram Mockup -->
+                    <div class="mobile-mockup instagram-mockup">
+                        <div class="mobile-screen"></div>
+                        <div class="platform-label">Instagram</div>
+                    </div>
+
+                    <!-- TikTok Mockup -->
+                    <div class="mobile-mockup tiktok-mockup">
+                        <div class="mobile-screen"></div>
+                        <div class="platform-label">TikTok</div>
+                    </div>
+
+                    <!-- YouTube Shorts Mockup -->
+                    <div class="mobile-mockup youtube-mockup">
+                        <div class="mobile-screen"></div>
+                        <div class="platform-label">YouTube Shorts</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

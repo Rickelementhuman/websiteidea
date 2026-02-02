@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Table</title>
+    <style>
+        :root {
+            --navy: #1e293b;
+            --blue1: #2563eb;
+            --blue2: #1e40af;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --green: #10b981;
+            --red: #ef4444;
+            --light-gray: #f8f9fa;
+            --border-color: #e5e7eb;
+        }
+
+        .comparison-section * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .comparison-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue1) 0%, var(--blue2) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--navy);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .comparison-table {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(37,99,235,0.1);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table thead th {
+            position: relative;
+        }
+
+        .table-logo {
+            max-width: 80%;
+            max-height: 40px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--blue1) 0%, var(--blue2) 100%);
+            color: var(--white);
+            padding: 20px 20px;
+        }
+
+        .company-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .logo-container {
+            text-align: center;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .company-logo {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .table-body {
+            overflow-x: visible;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .comparison-table th {
+            background: var(--light-gray);
+            padding: 25px 20px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--navy);
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+            min-height: 70px;
+        }
+
+        .comparison-table td {
+            padding: 25px 15px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .feature-name {
+            text-align: left;
+            font-weight: 600;
+            color: var(--navy);
+            background: var(--light-gray);
+            width: 30%;
+        }
+
+        .comparison-table th:not(.feature-name),
+        .comparison-table td:not(.feature-name) {
+            width: 23.33%;
+        }
+
+        .status-icon {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .status-yes {
+            color: var(--green);
+        }
+
+        .status-no {
+            color: var(--red);
+        }
+
+        .status-warning {
+            color: #f59e0b;
+        }
+
+        .status-text {
+            font-size: 0.85rem;
+            color: var(--navy);
+            opacity: 0.8;
+            max-width: 150px;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .highlight-cell {
+            background: rgba(37, 99, 235, 0.05);
+            border-left: 3px solid var(--blue1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .comparison-section {
+                padding: 60px 0;
+            }
+
+            .table-header {
+                padding: 20px 15px;
+            }
+
+            .logo-container {
+                max-width: 250px;
+            }
+
+            .company-logo {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .comparison-table {
+                font-size: 0.75rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 15px 8px;
+            }
+
+            .comparison-table th {
+                min-height: 50px;
+            }
+
+            .table-logo {
+                max-width: 75%;
+                max-height: 30px;
+            }
+
+            .comparison-table th:first-child {
+                font-size: 0.8rem;
+                font-weight: 600;
+                padding: 15px 12px;
+            }
+
+            .feature-name {
+                font-size: 0.75rem;
+                padding: 12px 8px;
+                width: 35%;
+            }
+
+            .comparison-table th:not(.feature-name),
+            .comparison-table td:not(.feature-name) {
+                width: 21.67%;
+                text-align: center;
+            }
+
+            .status-text {
+                font-size: 0.65rem;
+                line-height: 1.2;
+                margin: 2px 0;
+                max-width: none;
+            }
+
+            .status-icon {
+                font-size: 1rem;
+                margin-bottom: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 8px;
+            }
+
+            .comparison-section {
+                padding: 40px 0;
+            }
+
+            .table-header {
+                padding: 18px 12px;
+            }
+
+            .logo-container {
+                max-width: 200px;
+            }
+
+            .company-logo {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .comparison-table {
+                font-size: 0.7rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 6px;
+            }
+
+            .comparison-table th {
+                min-height: 45px;
+            }
+
+            .table-logo {
+                max-width: 70%;
+                max-height: 25px;
+            }
+
+            .comparison-table th:first-child {
+                font-size: 0.75rem;
+                font-weight: 600;
+                padding: 12px 8px;
+            }
+
+            .feature-name {
+                font-size: 0.7rem;
+                padding: 10px 6px;
+                width: 35%;
+            }
+
+            .comparison-table th:not(.feature-name),
+            .comparison-table td:not(.feature-name) {
+                width: 21.67%;
+            }
+
+            .status-text {
+                font-size: 0.6rem;
+                line-height: 1.2;
+                margin: 1px 0;
+                max-width: none;
+            }
+
+            .status-icon {
+                font-size: 0.9rem;
+                margin-bottom: 1px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .container {
+                padding: 0 5px;
+            }
+
+            .comparison-section {
+                padding: 30px 0;
+            }
+
+            .table-header {
+                padding: 15px 8px;
+            }
+
+            .logo-container {
+                max-width: 150px;
+            }
+
+            .company-logo {
+                width: 100%;
+                max-width: 150px;
+            }
+
+            .comparison-table {
+                font-size: 0.65rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 5px;
+            }
+
+            .comparison-table th {
+                min-height: 40px;
+            }
+
+            .table-logo {
+                max-width: 65%;
+                max-height: 20px;
+            }
+
+            .comparison-table th:first-child {
+                font-size: 0.7rem;
+                font-weight: 600;
+                padding: 10px 6px;
+            }
+
+            .feature-name {
+                font-size: 0.65rem;
+                padding: 8px 5px;
+                width: 35%;
+            }
+
+            .comparison-table th:not(.feature-name),
+            .comparison-table td:not(.feature-name) {
+                width: 21.67%;
+            }
+
+            .status-text {
+                font-size: 0.55rem;
+                line-height: 1.2;
+                margin: 1px 0;
+                max-width: none;
+            }
+
+            .status-icon {
+                font-size: 0.8rem;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="comparison-section">
+            <div class="container">
+
+                
+            <div class="comparison-table">
+                <div class="table-header">
+                    <div class="company-logos">
+                        <div class="logo-container">
+                            <img src="https://cdn.prod.website-files.com/5e943092459693077575d420/5e9f44bf550a7e57af8bf71b_logo.svg" alt="Element Human" class="company-logo">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>
+                                    <img src="https://cdn.prod.website-files.com/5e943092459693077575d420/5eb452140058c07cabd38958_icon-elementhuman.svg" alt="Element Human" class="table-logo">
+                                </th>
+                                <th>
+                                    <img src="https://cdn.prod.website-files.com/5e943092459693077575d420/688c7af2d5cb814c3c3ddffb_Kantarlogo.svg" alt="Kantar" class="table-logo">
+                                </th>
+                                <th>
+                                    <img src="https://cdn.prod.website-files.com/5e943092459693077575d420/688c7ac22ca1858dffaa7889_ThisThatlogo.avif" alt="ThisThat" class="table-logo">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Attention, Emotion, Memory</td>
+                                <td class="highlight-cell">
+                                    <div class="status-icon status-yes">✓</div>
+                                    <div class="status-text">Measures all 3</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Emotion mostly inferred - it's an add-on module for Context Lab</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Survey only, attention implied via direct to influencer follower tool</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Biometric + IAT Data</td>
+                                <td class="highlight-cell">
+                                    <div class="status-icon status-yes">✓</div>
+                                    <div class="status-text">Native and rigorous</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Some emotion proxies</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-no">✗</div>
+                                    <div class="status-text">Survey + influencer panels</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">In-Context Testing (CTV + Social)</td>
+                                <td class="highlight-cell">
+                                    <div class="status-icon status-yes">✓</div>
+                                    <div class="status-text">Simulated feeds and breaks</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Varies by project</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">For social only</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Product Placement Insight</td>
+                                <td class="highlight-cell">
+                                    <div class="status-icon status-yes">✓</div>
+                                    <div class="status-text">Yes, full in-scene testing</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-no">✗</div>
+                                    <div class="status-text">No context fidelity</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-no">✗</div>
+                                    <div class="status-text">Not supported</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Speed, Cost, Quality</td>
+                                <td class="highlight-cell">
+                                    <div class="status-icon status-yes">✓</div>
+                                    <div class="status-text">All three</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-no">✗</div>
+                                    <div class="status-text">Slow, costly</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Fast for simulated only - natural exposure often requires simulated topups</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Fraud + Noise Protection</td>
+                                <td class="highlight-cell">
+                                    <div class="status-icon status-yes">✓</div>
+                                    <div class="status-text">Cleans for bots, straight-liners</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Manual QA</div>
+                                </td>
+                                <td>
+                                    <div class="status-icon status-warning">⚠</div>
+                                    <div class="status-text">Panel risk</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

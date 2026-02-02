@@ -1,0 +1,376 @@
+<!-- [Attributes by Finsweet] CMS Load -->
+<script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsload@1/cmsload.js"></script>
+
+<style>
+    :root {
+        --navy: #1e293b;
+        --blue1: #2563eb;
+        --blue2: #1e40af;
+        --white: #fff;
+        --light-gray: #f8f9fa;
+        --border-color: #e5e7eb;
+        --accent: #4a3aff;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Filter UI */
+    .filter-container {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 48px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+    }
+
+    .filter-row {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .filter-label {
+        display: block;
+        font-weight: 600;
+        color: var(--navy);
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        background: var(--white);
+        color: var(--navy);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: var(--blue1);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Results info */
+    .results-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 32px;
+        padding: 0 4px;
+    }
+
+    .results-count {
+        font-size: 1rem;
+        color: var(--navy);
+        opacity: 0.7;
+    }
+
+    .clear-filters {
+        background: none;
+        border: none;
+        color: var(--blue1);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        text-decoration: underline;
+    }
+
+    .clear-filters:hover {
+        background: rgba(37, 99, 235, 0.1);
+        text-decoration: none;
+    }
+
+    /* Hide filtered items */
+    .w-dyn-item.filtered-hidden {
+        display: none !important;
+    }
+
+    /* Finsweet Load More Button Styling */
+    [fs-cmsload-element="button"] {
+        background: linear-gradient(135deg, var(--blue1), var(--blue2));
+        color: var(--white);
+        border: none;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        margin: 40px auto;
+        display: block;
+    }
+
+    [fs-cmsload-element="button"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+    }
+</style>
+
+<!-- Filter UI (Place this ABOVE your Webflow Collection List) -->
+<div class="filter-container">
+    <div class="filter-row">
+        <div class="filter-group">
+            <label for="category-filter" class="filter-label">Category</label>
+            <select id="category-filter" class="filter-select">
+                <option value="">All Categories</option>
+                <!-- Categories will be populated dynamically from your CMS data -->
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Results Info -->
+<div class="results-info">
+    <div class="results-count" id="results-count">Loading posts...</div>
+    <button class="clear-filters" id="clear-filters" style="display: none;">Clear Filters</button>
+</div>
+
+<!-- 
+YOUR WEBFLOW COLLECTION LIST GOES HERE
+
+IMPORTANT: Add this data attribute to each Collection Item:
+In your Collection Item settings, add:
+- Attribute: data-category
+- Value: [Click the + icon and select your Category field from CMS]
+
+Also add these to your Collection List:
+- fs-cmsload-element="list"
+
+Collection List Settings:
+- Pagination enabled
+- "Load more button" selected
+-->
+
+<script>
+class SimpleWebflowFilter {
+    constructor() {
+        this.currentFilter = '';
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.updateResultsCount();
+        
+        // Wait for Finsweet to load, then set up observers
+        setTimeout(() => {
+            this.setupFinsweet();
+            this.buildCategoryOptions();
+        }, 1000);
+    }
+
+    setupEventListeners() {
+        const categoryFilter = document.getElementById('category-filter');
+        const clearFilters = document.getElementById('clear-filters');
+
+        categoryFilter.addEventListener('change', (e) => {
+            this.currentFilter = e.target.value.toLowerCase();
+            this.filterPosts();
+            this.updateResultsCount();
+            this.toggleClearButton();
+        });
+
+        clearFilters.addEventListener('click', () => {
+            this.clearFilters();
+        });
+    }
+
+    setupFinsweet() {
+        // Watch for new posts being loaded by Finsweet
+        const observer = new MutationObserver(() => {
+            // Re-build categories and re-apply filters when new posts are loaded
+            setTimeout(() => {
+                this.buildCategoryOptions();
+                if (this.currentFilter) {
+                    this.filterPosts();
+                }
+                this.updateResultsCount();
+            }, 100);
+        });
+
+        // Observe the collection list for changes
+        const collectionList = document.querySelector('[fs-cmsload-element="list"]');
+        if (collectionList) {
+            observer.observe(collectionList, { childList: true, subtree: true });
+        }
+
+        // Also listen for load more button clicks
+        const loadButton = document.querySelector('[fs-cmsload-element="button"]');
+        if (loadButton) {
+            loadButton.addEventListener('click', () => {
+                setTimeout(() => {
+                    this.buildCategoryOptions();
+                    if (this.currentFilter) {
+                        this.filterPosts();
+                    }
+                    this.updateResultsCount();
+                }, 1000);
+            });
+        }
+    }
+
+    filterPosts() {
+        const posts = document.querySelectorAll('.w-dyn-item');
+        
+        posts.forEach(post => {
+            if (!this.currentFilter) {
+                // Show all posts
+                post.classList.remove('filtered-hidden');
+                return;
+            }
+
+            // Look for category in the post
+            const categoryFound = this.findCategoryInPost(post, this.currentFilter);
+            
+            if (categoryFound) {
+                post.classList.remove('filtered-hidden');
+            } else {
+                post.classList.add('filtered-hidden');
+            }
+        });
+    }
+
+    findCategoryInPost(post, targetCategory) {
+        // Primary method: Check data-category attribute (inserted from CMS)
+        const dataCategory = post.getAttribute('data-category');
+        if (dataCategory && dataCategory.toLowerCase().trim() === targetCategory) {
+            return true;
+        }
+
+        // Fallback: Check if category appears in post content
+        const allText = post.textContent.toLowerCase();
+        if (allText.includes(targetCategory)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    updateResultsCount() {
+        const allPosts = document.querySelectorAll('.w-dyn-item');
+        const visiblePosts = document.querySelectorAll('.w-dyn-item:not(.filtered-hidden)');
+        const resultsCount = document.getElementById('results-count');
+
+        if (this.currentFilter) {
+            resultsCount.textContent = `Showing ${visiblePosts.length} of ${allPosts.length} posts`;
+        } else {
+            resultsCount.textContent = `${allPosts.length} posts`;
+        }
+    }
+
+    toggleClearButton() {
+        const clearButton = document.getElementById('clear-filters');
+        clearButton.style.display = this.currentFilter ? 'block' : 'none';
+    }
+
+    clearFilters() {
+        this.currentFilter = '';
+        document.getElementById('category-filter').value = '';
+        this.filterPosts();
+        this.updateResultsCount();
+        this.toggleClearButton();
+    }
+
+    buildCategoryOptions() {
+        const categorySelect = document.getElementById('category-filter');
+        const posts = document.querySelectorAll('.w-dyn-item[data-category]');
+        const categories = new Set();
+
+        // Extract unique categories from CMS data
+        posts.forEach(post => {
+            const category = post.getAttribute('data-category');
+            if (category && category.trim()) {
+                categories.add(category.trim().toLowerCase());
+            }
+        });
+
+        // Clear existing options except "All Categories"
+        while (categorySelect.children.length > 1) {
+            categorySelect.removeChild(categorySelect.lastChild);
+        }
+
+        // Add categories found in CMS
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = this.formatCategoryName(category);
+            categorySelect.appendChild(option);
+        });
+
+        console.log('Found categories from CMS:', Array.from(categories));
+    }
+
+    formatCategoryName(category) {
+        // Format category names for display
+        const specialCases = {
+            'creator economy': 'Creator Economy',
+            'market research': 'Market Research',
+            'influencer marketing': 'Influencer Marketing',
+            'ai': 'AI'
+        };
+
+        if (specialCases[category.toLowerCase()]) {
+            return specialCases[category.toLowerCase()];
+        }
+
+        // Default: capitalize first letter
+        return category.charAt(0).toUpperCase() + category.slice(1);
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new SimpleWebflowFilter();
+});
+</script>
+
+<!-- 
+SETUP INSTRUCTIONS:
+==================
+
+1. ADD FINSWEET SCRIPT TO WEBFLOW:
+   - Go to Project Settings > Custom Code > Head Code
+   - Add: <script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsload@1/cmsload.js"></script>
+
+2. CONFIGURE YOUR COLLECTION ITEM (MOST IMPORTANT):
+   - Select your Collection Item (the div inside the Collection List)
+   - In Element Settings, add custom attribute:
+     * Attribute: data-category
+     * Value: Click the purple + icon and select your "Category" field from the CMS
+   - This inserts the actual CMS category value into the HTML
+
+3. CONFIGURE YOUR COLLECTION LIST:
+   - Select your Collection List element
+   - Add custom attribute: fs-cmsload-element = list
+   - In Collection List Settings:
+     * Set initial items to show (e.g., 6)
+     * Enable pagination
+     * Choose "Load more button"
+
+4. PLACE THIS CODE:
+   - Put this entire code block in a Code Block element
+   - Place it ABOVE your Collection List on the page
+
+5. MAKE SURE YOUR CMS HAS:
+   - A "Category" field with values like: advertising, marketing, insights, etc.
+
+The key is step 2 - using Webflow's CMS field insertion into the data-category attribute!
+-->

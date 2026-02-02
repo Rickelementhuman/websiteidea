@@ -1,0 +1,292 @@
+/* Neon Glass Box - Corner-Based Light Source (WORKING VERSION) */
+
+.neon-glass-box {
+  --box-radius: 32px;
+  --top-hue: 183;
+  --bottom-hue: 120;
+  --glow-blur: 12px;
+  --glow-bright-blur: 2px;
+  --glow-opacity: 1;
+  --shine-brightness: 0.5;
+  --backdrop-blur: 20px;
+
+  position: relative;
+  border-radius: var(--box-radius);
+  border: 1px solid hsl(220 12% 20%);
+  padding: 1em;
+  background: linear-gradient(
+      235deg,
+      hsl(var(--top-hue) 50% 10% / 0.7),
+      hsl(var(--top-hue) 50% 10% / 0) 33%
+    ),
+    linear-gradient(
+      45deg,
+      hsl(var(--bottom-hue) 50% 10% / 0.7),
+      hsl(var(--bottom-hue) 50% 10% / 0) 33%
+    ),
+    linear-gradient(hsl(220deg 25% 4.8% / 0.6));
+  backdrop-filter: blur(var(--backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--backdrop-blur));
+  box-shadow:
+    hsl(220 50% 2%) 0px 10px 16px -8px,
+    hsl(220 50% 4%) 0px 20px 36px -14px;
+  overflow: hidden;
+}
+
+/* Corner-Based Shine Elements */
+.neon-glass-box .shine {
+  --hue: var(--top-hue);
+  --conic: -45deg;
+  pointer-events: none;
+  width: 75%;
+  aspect-ratio: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 0;
+  border-top-right-radius: var(--box-radius);
+  border: 1px solid transparent;
+  z-index: 1;
+  opacity: 0.6;
+  background: conic-gradient(
+      from var(--conic) at center,
+      transparent 30%,
+      hsl(var(--hue) 70% 55%) 45%,
+      transparent 60%
+    )
+    border-box;
+}
+
+.neon-glass-box .shine::before,
+.neon-glass-box .shine::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: inherit;
+  border-radius: inherit;
+  background: inherit;
+  -webkit-mask: linear-gradient(transparent), linear-gradient(black);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-clip: padding-box, border-box;
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(transparent), linear-gradient(black);
+  mask-repeat: no-repeat;
+  mask-clip: padding-box, border-box;
+  mask-composite: subtract;
+}
+
+.neon-glass-box .shine-bottom {
+  --hue: var(--bottom-hue);
+  --conic: 135deg;
+  right: auto;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  border-radius: 0;
+  border-bottom-left-radius: var(--box-radius);
+}
+
+/* Corner-Based Glow Elements */
+.neon-glass-box .glow {
+  --hue: var(--top-hue);
+  --conic: -45deg;
+  pointer-events: none;
+  border-top-right-radius: calc(var(--box-radius) * 1.5);
+  border-bottom-left-radius: calc(var(--box-radius) * 1.5);
+  border: calc(var(--box-radius) * 0.5) solid transparent;
+  width: 200px;
+  height: 200px;
+  display: block;
+  position: absolute;
+  right: calc(var(--box-radius) * -1);
+  top: calc(var(--box-radius) * -1);
+  opacity: var(--glow-opacity);
+  filter: blur(var(--glow-blur)) saturate(1.25) brightness(var(--shine-brightness));
+  mix-blend-mode: plus-lighter;
+  z-index: 0;
+}
+
+.neon-glass-box .glow::before,
+.neon-glass-box .glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: inherit;
+  border-radius: inherit;
+  background: conic-gradient(
+      from var(--conic) at center,
+      transparent 0%,
+      hsl(var(--hue) 95% 60%),
+      transparent 50%
+    )
+    border-box;
+  -webkit-mask: linear-gradient(transparent), linear-gradient(black);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-clip: padding-box, border-box;
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(transparent), linear-gradient(black);
+  mask-repeat: no-repeat;
+  mask-clip: padding-box, border-box;
+  mask-composite: subtract;
+  filter: saturate(2) brightness(1);
+}
+
+.neon-glass-box .glow::after {
+  border-width: calc(var(--box-radius) * 0.75);
+  border-radius: calc(var(--box-radius) * 1.75);
+  inset: calc(var(--box-radius) * -0.1);
+  z-index: 1;
+  opacity: 0.75;
+  background: conic-gradient(
+      from var(--conic) at center,
+      transparent 15%,
+      hsl(var(--hue) 100% 70%),
+      transparent 35%
+    )
+    border-box;
+}
+
+/* Alias for experiment-4 compatibility */
+.neon-glass-box .glow-top {
+  /* Uses default .glow positioning (top-right) */
+}
+
+.neon-glass-box .glow-bottom {
+  --hue: var(--bottom-hue);
+  --conic: 135deg;
+  right: auto;
+  left: calc(var(--box-radius) * -1);
+  top: auto;
+  bottom: calc(var(--box-radius) * -1);
+}
+
+.neon-glass-box .glow-bright {
+  border-width: 5px;
+  border-radius: calc(var(--box-radius) + 2px);
+  inset: -7px;
+  right: -7px;
+  left: auto;
+  top: -7px;
+  bottom: auto;
+  filter: blur(var(--glow-bright-blur)) brightness(0.66);
+}
+
+.neon-glass-box .glow-bright::after {
+  content: none;
+}
+
+.neon-glass-box .glow-bright.glow-bottom {
+  right: auto;
+  left: -7px;
+  top: auto;
+  bottom: -7px;
+}
+
+/* ADDITIONAL CORNER VARIANTS for NeonGlassBoxV2 */
+.neon-glass-box .shine-top-left {
+  --hue: var(--top-hue);
+  --conic: 45deg;
+  right: auto;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  border-top-left-radius: var(--box-radius);
+}
+
+.neon-glass-box .shine-top-right {
+  --hue: var(--top-hue);
+  --conic: -45deg;
+  right: 0;
+  left: auto;
+  top: 0;
+  border-radius: 0;
+  border-top-right-radius: var(--box-radius);
+}
+
+.neon-glass-box .shine-bottom-left {
+  --hue: var(--bottom-hue);
+  --conic: 135deg;
+  right: auto;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  border-radius: 0;
+  border-bottom-left-radius: var(--box-radius);
+}
+
+.neon-glass-box .shine-bottom-right {
+  --hue: var(--bottom-hue);
+  --conic: -135deg;
+  right: 0;
+  left: auto;
+  top: auto;
+  bottom: 0;
+  border-radius: 0;
+  border-bottom-right-radius: var(--box-radius);
+}
+
+.neon-glass-box .glow-top-left {
+  --hue: var(--top-hue);
+  --conic: -135deg;
+  right: auto;
+  left: calc(var(--box-radius) * -1);
+  top: calc(var(--box-radius) * -1);
+  bottom: auto;
+}
+
+.neon-glass-box .glow-top-right {
+  --hue: var(--top-hue);
+  --conic: -45deg;
+  right: calc(var(--box-radius) * -1);
+  left: auto;
+  top: calc(var(--box-radius) * -1);
+  bottom: auto;
+}
+
+.neon-glass-box .glow-bottom-left {
+  --hue: var(--bottom-hue);
+  --conic: 135deg;
+  right: auto;
+  left: calc(var(--box-radius) * -1);
+  top: auto;
+  bottom: calc(var(--box-radius) * -1);
+}
+
+.neon-glass-box .glow-bottom-right {
+  --hue: var(--bottom-hue);
+  --conic: 45deg;
+  right: calc(var(--box-radius) * -1);
+  left: auto;
+  top: auto;
+  bottom: calc(var(--box-radius) * -1);
+}
+
+.neon-glass-box .glow-bright.glow-top-left {
+  right: auto;
+  left: -7px;
+  top: -7px;
+  bottom: auto;
+}
+
+.neon-glass-box .glow-bright.glow-top-right {
+  right: -7px;
+  left: auto;
+  top: -7px;
+  bottom: auto;
+}
+
+.neon-glass-box .glow-bright.glow-bottom-left {
+  right: auto;
+  left: -7px;
+  top: auto;
+  bottom: -7px;
+}
+
+.neon-glass-box .glow-bright.glow-bottom-right {
+  right: -7px;
+  left: auto;
+  top: auto;
+  bottom: -7px;
+}
+
+/* Edge glows removed - only corner glows work properly */

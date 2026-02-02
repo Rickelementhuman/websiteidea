@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIDA Funnel Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --yellow: #F9BE00;
+            --navy: #13202F;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .aida-funnel-section * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .aida-funnel-section {
+            position: relative;
+            height: 250vh; /* Minimal scroll progression */
+            background: var(--white);
+            padding-top: 80px;
+        }
+
+        .methodology-legend h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .legend-color.attention { background: var(--yellow); }
+        .legend-color.emotion { background: var(--magenta); }
+        .legend-color.memory { background: var(--cyan); }
+        .legend-color.brand-uplift { background: var(--green); }
+
+        .funnel-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 3rem auto 0 auto;
+            padding: 0 60px;
+            z-index: 1;
+        }
+
+        .funnel-main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            flex: 1;
+            position: relative;
+            gap: 30px;
+            align-items: center;
+        }
+
+        /* Desktop: hide methodology from grid flow since it's absolutely positioned */
+        @media (min-width: 1025px) {
+            .methodology-legend {
+                display: block;
+            }
+            
+            .funnel-visual-container {
+                grid-column: 1;
+            }
+            
+            .funnel-content-container {
+                grid-column: 2;
+            }
+        }
+
+        .methodology-legend {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            max-width: 280px;
+            width: fit-content;
+            
+            /* Desktop positioning - more centered, less far right */
+            position: absolute;
+            top: 70px;
+            right: 0;
+            z-index: 10;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 6px;
+        }
+
+        .funnel-visual-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .funnel-visual {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+        }
+
+        .funnel-stage-visual {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--navy);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            transition: all 0.5s ease;
+            opacity: 0.3;
+            border-radius: 8px;
+        }
+
+        .funnel-stage-visual.active {
+            opacity: 1;
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .funnel-stage-visual.awareness {
+            top: 0;
+            width: 95%;
+            height: 120px;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        }
+
+        .funnel-stage-visual.interest {
+            top: 140px;
+            width: 80%;
+            height: 120px;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        }
+
+        .funnel-stage-visual.desire {
+            top: 280px;
+            width: 65%;
+            height: 120px;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        }
+
+        .funnel-stage-visual.action {
+            top: 420px;
+            width: 50%;
+            height: 120px;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        }
+
+        .funnel-content-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            min-height: 500px;
+        }
+
+        .funnel-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(30px);
+            text-align: center;
+        }
+
+        .funnel-content.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0);
+        }
+
+        .funnel-content h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .funnel-content p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+
+
+        .funnel-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .metric-item {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .metric-item.attention { border-left-color: var(--yellow); }
+        .metric-item.emotion { border-left-color: var(--magenta); }
+        .metric-item.memory { border-left-color: var(--cyan); }
+        .metric-item.brand-uplift { border-left-color: var(--green); }
+
+        .metric-item h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .metric-item h5:hover {
+            color: var(--magenta);
+        }
+
+        .metric-item p {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .metric-details {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .metric-details.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .metric-details.expanded {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 8px;
+        }
+
+        /* Medium screens - better layout transition */
+        @media (max-width: 1240px) and (min-width: 1025px) {
+            .aida-funnel-section {
+                padding-top: 70px;
+            }
+
+            .funnel-container {
+                margin: 3rem auto 0 auto;
+            }
+
+            .methodology-legend {
+                right: -30px;
+                top: 70px;
+                max-width: 260px;
+                padding: 10px;
+            }
+        }
+
+        /* Medium-small screens - keep grid with methodology top-right */
+        @media (max-width: 1024px) and (min-width: 770px) {
+            .aida-funnel-section {
+                padding-top: 65px;
+            }
+
+            .funnel-container {
+                margin: 0 auto;
+            }
+
+            .funnel-main-content {
+                display: grid;
+                grid-template-columns: 1fr 1.2fr;
+                gap: 20px;
+                align-items: center;
+                position: relative;
+            }
+
+            .methodology-legend {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                max-width: 250px;
+                padding: 12px;
+                z-index: 10;
+            }
+
+            .funnel-visual-container {
+                grid-column: 1;
+            }
+
+            .funnel-content-container {
+                grid-column: 2;
+                margin-top: 0;
+                padding: 10px 20px 20px 20px;
+            }
+
+            .legend-grid {
+                gap: 6px 10px;
+            }
+        }
+
+        /* Responsive Design - tablets and mobile */
+        @media (max-width: 769px) {
+            .funnel-main-content {
+                display: flex;
+                flex-direction: column;
+                grid-template-columns: none;
+            }
+
+            .methodology-legend {
+                /* Move to bottom for mobile */
+                position: static;
+                max-width: 350px;
+                padding: 14px;
+                margin: 25px auto 0 auto;
+                order: 3;
+            }
+
+            .funnel-visual-container {
+                order: 1;
+            }
+
+            .funnel-content-container {
+                order: 2;
+                padding: 5px 15px 20px 15px;
+                margin-top: -15px;
+            }
+
+            .legend-grid {
+                gap: 6px 10px;
+            }
+
+            .funnel-container {
+                padding: 0 40px;
+            }
+
+            .funnel-main-content {
+                gap: 20px;
+            }
+
+            .funnel-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .aida-funnel-section {
+                height: 300vh; /* More scroll space for mobile */
+                padding-top: 60px;
+            }
+
+            .funnel-container {
+                padding: 80px 15px 60px 15px;
+                justify-content: flex-start;
+                margin: 0 auto;
+            }
+
+            .funnel-main-content {
+                gap: 25px;
+                align-items: stretch;
+                height: auto;
+                min-height: calc(100vh - 120px);
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .funnel-content-container {
+                margin-top: -20px;
+            }
+
+            .methodology-legend {
+                position: static;
+                max-width: 100%;
+                padding: 8px 12px;
+                margin: 20px auto 0 auto;
+                width: fit-content;
+                order: 3;
+            }
+
+            .methodology-legend h4 {
+                text-align: center;
+                margin-bottom: 2px;
+                font-size: 0.8rem;
+            }
+
+            .legend-grid {
+                gap: 4px 8px;
+            }
+
+            .legend-item {
+                justify-content: flex-start;
+                font-size: 0.65rem;
+                margin-bottom: 2px;
+            }
+
+            .funnel-visual-container {
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                width: 100%;
+                margin-bottom: 10px;
+                order: 1;
+            }
+
+            .funnel-visual {
+                height: 350px;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .funnel-stage-visual {
+                font-size: 1.2rem;
+            }
+
+            .funnel-stage-visual.awareness,
+            .funnel-stage-visual.interest,
+            .funnel-stage-visual.desire,
+            .funnel-stage-visual.action {
+                height: 70px;
+            }
+
+            .funnel-stage-visual.interest { top: 85px; }
+            .funnel-stage-visual.desire { top: 170px; }
+            .funnel-stage-visual.action { top: 255px; }
+
+            .funnel-content-container {
+                padding: 5px 15px 20px 15px;
+                position: relative;
+                min-height: 300px;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                order: 2;
+                margin-top: -15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .funnel-content {
+                position: absolute;
+                width: 100%;
+                max-width: 100%;
+                left: 0;
+                right: 0;
+                top: 0;
+                padding: 0;
+                transform: translateY(30px);
+            }
+
+            .funnel-content.active {
+                transform: translateY(0);
+            }
+
+            .funnel-content h2 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+                text-align: center;
+                padding: 0 10px;
+                cursor: default;
+            }
+
+            .funnel-content p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+                text-align: center;
+                padding: 0 10px;
+                line-height: 1.5;
+            }
+
+
+
+            .funnel-metrics {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-top: 15px;
+                padding: 0 10px;
+            }
+
+            .metric-item {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            .metric-item h5 {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+                cursor: pointer;
+            }
+
+            .metric-details p {
+                font-size: 0.8rem;
+                text-align: left;
+                margin: 0;
+                line-height: 1.4;
+            }
+        }
+
+
+
+
+
+        @media (max-width: 480px) {
+            .aida-funnel-section {
+                height: 350vh; /* Even more scroll space for small phones */
+                padding-top: 50px;
+            }
+
+            .funnel-container {
+                padding: 70px 10px 40px 10px;
+                margin: 0 auto;
+            }
+
+            .funnel-main-content {
+                gap: 20px;
+                min-height: calc(100vh - 90px);
+                width: 100%;
+                max-width: 100vw;
+                margin: 0;
+                padding: 0;
+            }
+
+            .methodology-legend {
+                position: static;
+                padding: 6px 20px;
+                max-width: calc(100vw - 40px);
+                margin: 15px auto 0 auto;
+                order: 3;
+            }
+
+            .legend-grid {
+                gap: 3px 6px;
+            }
+
+            .legend-item {
+                justify-content: flex-start;
+                font-size: 0.6rem;
+                margin-bottom: 1px;
+            }
+
+            .funnel-visual-container {
+                width: 100%;
+                max-width: 100vw;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+
+            .funnel-visual {
+                height: 320px;
+                max-width: min(280px, calc(100vw - 30px));
+            }
+
+            .funnel-stage-visual {
+                font-size: 1.1rem;
+            }
+
+            .funnel-stage-visual.awareness,
+            .funnel-stage-visual.interest,
+            .funnel-stage-visual.desire,
+            .funnel-stage-visual.action {
+                height: 65px;
+            }
+
+            .funnel-stage-visual.interest { top: 78px; }
+            .funnel-stage-visual.desire { top: 156px; }
+            .funnel-stage-visual.action { top: 234px; }
+
+            .funnel-content-container {
+                padding: 0 10px 15px 10px;
+                width: 100%;
+                max-width: 100vw;
+                margin: 0;
+                min-height: 350px;
+                margin-top: -25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .funnel-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 5px;
+                box-sizing: border-box;
+            }
+
+            .funnel-content h2 {
+                font-size: 1.6rem;
+                padding: 0 5px;
+                word-wrap: break-word;
+                cursor: default;
+            }
+
+            .funnel-content p {
+                font-size: 0.85rem;
+                padding: 0 5px;
+                line-height: 1.4;
+            }
+
+            .funnel-metrics {
+                padding: 0 5px;
+                margin-top: 12px;
+            }
+
+            .metric-item {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+
+            .metric-item h5 {
+                font-size: 0.85rem;
+                margin-bottom: 0;
+            }
+
+            .metric-details p {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="aida-funnel-section">
+        <div class="funnel-container">
+            <div class="funnel-main-content">
+            <div class="methodology-legend">
+                <h4>Methodology</h4>
+                <div class="legend-grid">
+                    <div class="legend-item">
+                        <div class="legend-color attention"></div>
+                        <span>Attention</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color emotion"></div>
+                        <span>Emotion</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color memory"></div>
+                        <span>Memory</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color brand-uplift"></div>
+                        <span>Brand Uplift</span>
+                    </div>
+                </div>
+            </div>
+            <div class="funnel-visual-container">
+                <div class="funnel-visual">
+                    <div class="funnel-stage-visual awareness">AWARENESS</div>
+                    <div class="funnel-stage-visual interest">INTEREST</div>
+                    <div class="funnel-stage-visual desire">DESIRE</div>
+                    <div class="funnel-stage-visual action">ACTION</div>
+                </div>
+            </div>
+
+            <div class="funnel-content-container">
+                <!-- Awareness Content -->
+                <div class="funnel-content" data-stage="awareness">
+                    <h2>Awareness</h2>
+                    <p>Potential customers become aware of your brand and products.</p>
+                    <div class="funnel-metrics">
+                        <div class="metric-item attention">
+                            <h5 onclick="toggleMetric('awareness-attention', event)">Attention in Feed</h5>
+                            <div class="metric-details collapsed" id="awareness-attention-details">
+                                <p>Measures how well content captures attention in social media feeds and digital environments.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('awareness-recall', event)">Brand Recall</h5>
+                            <div class="metric-details collapsed" id="awareness-recall-details">
+                                <p>Assesses the ability of consumers to remember and recognize your brand after exposure.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('awareness-mind', event)">Top of Mind Awareness</h5>
+                            <div class="metric-details collapsed" id="awareness-mind-details">
+                                <p>Measures when your brand is the first that comes to mind in a category.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('awareness-unaided', event)">Unaided Awareness</h5>
+                            <div class="metric-details collapsed" id="awareness-unaided-details">
+                                <p>Tests spontaneous brand recognition without prompting or assistance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interest Content -->
+                <div class="funnel-content" data-stage="interest">
+                    <h2>Interest</h2>
+                    <p>The stage where potential customers develop curiosity and begin to actively seek more information about your products or services.</p>
+                    <div class="funnel-metrics">
+                        <div class="metric-item emotion">
+                            <h5 onclick="toggleMetric('interest-emotional', event)">Emotional Response</h5>
+                            <div class="metric-details collapsed" id="interest-emotional-details">
+                                <p>Measures the emotional impact and connection consumers feel with your brand content.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item emotion">
+                            <h5 onclick="toggleMetric('interest-moments', event)">Key Moments</h5>
+                            <div class="metric-details collapsed" id="interest-moments-details">
+                                <p>Identifies the most impactful moments that drive engagement and interest in your content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desire Content -->
+                <div class="funnel-content" data-stage="desire">
+                    <h2>Desire</h2>
+                    <p>The stage where potential customers develop a strong preference for your brand and begin to see it as the solution to their needs.</p>
+                    <div class="funnel-metrics">
+                        <div class="metric-item memory">
+                            <h5 onclick="toggleMetric('desire-implicit', event)">Implicit Brand Associations</h5>
+                            <div class="metric-details collapsed" id="desire-implicit-details">
+                                <p>Measures subconscious brand connections and associations formed through content exposure.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item attention">
+                            <h5 onclick="toggleMetric('desire-explicit', event)">Explicit Brand Associations</h5>
+                            <div class="metric-details collapsed" id="desire-explicit-details">
+                                <p>Tests conscious brand connections and attributes that consumers actively associate with your brand.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('desire-positivity', event)">Brand Positivity</h5>
+                            <div class="metric-details collapsed" id="desire-positivity-details">
+                                <p>Measures the positive sentiment and favorable attitudes toward your brand.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('desire-consideration', event)">Consideration</h5>
+                            <div class="metric-details collapsed" id="desire-consideration-details">
+                                <p>Measures the likelihood of consumers considering your brand for their next purchase decision.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Content -->
+                <div class="funnel-content" data-stage="action">
+                    <h2>Action</h2>
+                    <p>The final stage where potential customers take the desired action, such as making a purchase, signing up, or converting in some way.</p>
+                    <div class="funnel-metrics">
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('action-purchase', event)">Purchase Intent</h5>
+                            <div class="metric-details collapsed" id="action-purchase-details">
+                                <p>Assesses the probability of consumers making a purchase from your brand.</p>
+                            </div>
+                        </div>
+                        <div class="metric-item brand-uplift">
+                            <h5 onclick="toggleMetric('action-recommend', event)">Recommend Intent</h5>
+                            <div class="metric-details collapsed" id="action-recommend-details">
+                                <p>Measures the likelihood of consumers recommending your brand to others.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // Accordion functionality for mobile metrics
+        function toggleMetric(metricId, event) {
+            // Prevent event bubbling
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            
+            // Only on tablet and mobile screens (768px and below)
+            if (window.innerWidth <= 768) {
+                // Extract stage name from metricId (e.g., 'awareness-attention' -> 'awareness')
+                const stageName = metricId.split('-')[0];
+                
+                // Find the specific details element for this metric
+                const detailsId = metricId + '-details';
+                const details = document.getElementById(detailsId);
+                
+                if (!details) {
+                    console.error(`Details element not found for ID: ${detailsId}`);
+                    return;
+                }
+                
+                // Find the parent stage container
+                const parentStage = details.closest('.funnel-content');
+                
+                if (!parentStage) {
+                    console.error(`Parent stage not found for metric: ${metricId}`);
+                    return;
+                }
+                
+                // Verify we're working with the correct stage
+                const expectedStage = document.querySelector(`.funnel-content[data-stage="${stageName}"]`);
+                if (parentStage !== expectedStage) {
+                    console.error(`Stage mismatch for metric: ${metricId}`);
+                    return;
+                }
+                
+                // Get all metric details within this specific stage only
+                const stageMetricDetails = parentStage.querySelectorAll('.metric-details');
+                const isCurrentlyExpanded = details.classList.contains('expanded');
+                
+                // Close all metric details in this stage first
+                stageMetricDetails.forEach(detail => {
+                    detail.classList.remove('expanded');
+                    detail.classList.add('collapsed');
+                });
+                
+                // If the clicked one wasn't expanded, expand it
+                if (!isCurrentlyExpanded) {
+                    details.classList.remove('collapsed');
+                    details.classList.add('expanded');
+                }
+                
+                console.log(`Toggled metric: ${metricId} in stage: ${stageName}, expanded: ${!isCurrentlyExpanded}`);
+            }
+        }
+
+        class AidaFunnelController {
+            constructor() {
+                this.section = document.querySelector('.aida-funnel-section');
+                this.visualStages = document.querySelectorAll('.funnel-stage-visual');
+                this.contentStages = document.querySelectorAll('.funnel-content');
+                this.currentStage = 0;
+                this.stages = ['awareness', 'interest', 'desire', 'action'];
+                this.isMobile = window.innerWidth <= 768;
+                
+                this.init();
+            }
+
+            init() {
+                this.updateFunnelState();
+                this.bindEvents();
+                
+                // Set initial state
+                this.activateStage(0);
+                
+                // Handle mobile vs desktop content display
+                this.handleResponsiveContent();
+            }
+
+            bindEvents() {
+                window.addEventListener('scroll', () => {
+                    requestAnimationFrame(() => this.handleScroll());
+                });
+
+                window.addEventListener('resize', () => {
+                    this.isMobile = window.innerWidth <= 768;
+                    this.handleResponsiveContent();
+                    requestAnimationFrame(() => this.updateFunnelState());
+                });
+            }
+
+            handleResponsiveContent() {
+                // Handle each stage independently to prevent cross-stage interference
+                const stages = ['awareness', 'interest', 'desire', 'action'];
+                
+                if (this.isMobile) {
+                    // On mobile/tablet, collapse all metric details initially
+                    // Keep original positioning but ensure clicks work on active stage
+                    stages.forEach(stageName => {
+                        const stage = document.querySelector(`.funnel-content[data-stage="${stageName}"]`);
+                        if (stage) {
+                            const stageMetricDetails = stage.querySelectorAll('.metric-details');
+                            stageMetricDetails.forEach(detail => {
+                                detail.classList.add('collapsed');
+                                detail.classList.remove('expanded');
+                            });
+                            
+                            // Ensure proper z-index and pointer events for active stage
+                            if (stage.classList.contains('active')) {
+                                stage.style.zIndex = '10';
+                                stage.style.pointerEvents = 'auto';
+                            } else {
+                                stage.style.zIndex = '1';
+                                stage.style.pointerEvents = 'none';
+                            }
+                        }
+                    });
+                } else {
+                    // On desktop, show all metric details in active stage only
+                    stages.forEach(stageName => {
+                        const stage = document.querySelector(`.funnel-content[data-stage="${stageName}"]`);
+                        if (stage) {
+                            // Reset mobile-specific styling
+                            stage.style.zIndex = '';
+                            stage.style.pointerEvents = '';
+                            
+                            const stageMetricDetails = stage.querySelectorAll('.metric-details');
+                            const isActiveStage = stage.classList.contains('active');
+                            
+                            stageMetricDetails.forEach(detail => {
+                                if (isActiveStage) {
+                                    detail.classList.remove('collapsed');
+                                    detail.classList.add('expanded');
+                                } else {
+                                    detail.classList.add('collapsed');
+                                    detail.classList.remove('expanded');
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
+            handleScroll() {
+                if (!this.section) return;
+
+                const sectionRect = this.section.getBoundingClientRect();
+                const sectionTop = sectionRect.top;
+                const sectionHeight = sectionRect.height;
+                const windowHeight = window.innerHeight;
+
+                // Check if section is in view
+                if (sectionTop > windowHeight || sectionTop + sectionHeight < 0) {
+                    return;
+                }
+
+                // Calculate progress through the section (0 to 1)
+                let scrollProgress;
+                
+                // Start animation immediately when section enters viewport
+                if (sectionTop <= windowHeight) {
+                if (sectionTop <= 0) {
+                    // Section is sticky, calculate based on how much we've scrolled through it
+                    scrollProgress = Math.abs(sectionTop) / (sectionHeight - windowHeight);
+                    } else {
+                        // Section is entering the viewport, start animation immediately
+                        scrollProgress = (windowHeight - sectionTop) / windowHeight * 0.2;
+                    }
+                } else {
+                    // Section not in viewport yet
+                    scrollProgress = 0;
+                }
+
+                // Clamp progress between 0 and 1
+                scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+                // Determine which stage should be active based on scroll progress
+                const stageIndex = Math.floor(scrollProgress * this.stages.length);
+                const clampedStageIndex = Math.max(0, Math.min(this.stages.length - 1, stageIndex));
+
+                if (clampedStageIndex !== this.currentStage) {
+                    this.activateStage(clampedStageIndex);
+                }
+            }
+
+            activateStage(stageIndex) {
+                this.currentStage = stageIndex;
+                const stageName = this.stages[stageIndex];
+
+                // Update visual stages
+                this.visualStages.forEach((stage, index) => {
+                    stage.classList.toggle('active', index === stageIndex);
+                });
+
+                // Update content stages with fade transition (same for desktop and mobile)
+                this.contentStages.forEach((content, index) => {
+                    const isActive = index === stageIndex;
+                    content.classList.toggle('active', isActive);
+                    
+                    // In mobile, ensure proper click handling with z-index and pointer events
+                    if (this.isMobile) {
+                        if (isActive) {
+                            content.style.zIndex = '10';
+                            content.style.pointerEvents = 'auto';
+                        } else {
+                            content.style.zIndex = '1';
+                            content.style.pointerEvents = 'none';
+                        }
+                    } else {
+                        // Reset mobile-specific styling on desktop
+                        content.style.zIndex = '';
+                        content.style.pointerEvents = '';
+                    }
+                });
+
+                // Handle responsive content for the new active stage
+                this.handleResponsiveContent();
+
+                console.log(`Activated stage: ${stageName} (${stageIndex})`);
+            }
+
+            updateFunnelState() {
+                // Force a recalculation on resize or initialization
+                this.handleScroll();
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                new AidaFunnelController();
+            });
+        } else {
+            new AidaFunnelController();
+        }
+
+        // Also initialize after a short delay to ensure everything is loaded
+        setTimeout(() => {
+            if (!window.aidaFunnelController) {
+                window.aidaFunnelController = new AidaFunnelController();
+            }
+        }, 500);
+    </script>
+</body>
+</html> 

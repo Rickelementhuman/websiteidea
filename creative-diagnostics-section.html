@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Diagnostics Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .creative-diagnostics * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .creative-diagnostics {
+            font-family: inherit;
+            line-height: 1.6;
+            color: inherit;
+            background: inherit;
+        }
+
+        .creative-diagnostics * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Creative Diagnostics Section */
+        .creative-diagnostics-section {
+            background: var(--white);
+            padding: 0;
+        }
+
+        .creative-diagnostics-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 0;
+        }
+
+        .creative-diagnostics-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 30px;
+        }
+
+        .creative-diagnostics-subtitle {
+            font-size: 1.25rem;
+            color: var(--magenta);
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+
+        .creative-diagnostics-description {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+
+        .creative-diagnostics-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .diagnostics-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .diagnostics-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .emotions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding: 20px 0;
+        }
+
+        .emotions-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .emotions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .emotion-card {
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .emotion-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--magenta);
+        }
+
+        .emotion-emoji {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .emotion-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--navy);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--magenta);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            background: #e01a7a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 33, 152, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .creative-diagnostics-content {
+                gap: 40px;
+            }
+
+            .emotions-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+
+            .emotion-card {
+                padding: 12px 8px;
+            }
+
+            .emotion-emoji {
+                font-size: 1.6rem;
+            }
+
+            .emotion-label {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .creative-diagnostics-section {
+                padding: 0;
+            }
+
+            .creative-diagnostics-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .diagnostics-image-container {
+                order: 1;
+            }
+
+            .emotions-container {
+                order: 2;
+            }
+
+            .emotions-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+
+            .emotion-card {
+                padding: 10px 6px;
+            }
+
+            .emotion-emoji {
+                font-size: 1.4rem;
+            }
+
+            .emotion-label {
+                font-size: 0.75rem;
+            }
+
+            .creative-diagnostics-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .creative-diagnostics-section {
+                padding: 0;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .creative-diagnostics-content {
+                gap: 30px;
+            }
+
+            .emotions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .emotion-card {
+                padding: 8px 4px;
+            }
+
+            .emotion-emoji {
+                font-size: 1.2rem;
+            }
+
+            .emotion-label {
+                font-size: 0.7rem;
+            }
+
+            .creative-diagnostics-title {
+                font-size: 2rem;
+            }
+
+            .emotions-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="creative-diagnostics">
+        <!-- Creative Diagnostics Section -->
+        <section class="creative-diagnostics-section">
+            <div class="container">
+                <div class="creative-diagnostics-header">
+                </div>
+
+                <div class="creative-diagnostics-content">
+                    <div class="diagnostics-image-container">
+                        <img src="https://cdn.prod.website-files.com/5e943092459693077575d420/68922ea19acb5fb2b75e4b0d_aticgif.gif" 
+                             alt="Creative Diagnostics Interface" 
+                             class="diagnostics-image">
+                    </div>
+
+                    <div class="emotions-container">
+                        <h3 class="emotions-title">The Seven Universal Emotions</h3>
+                        
+                        <div class="emotions-grid">
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">😊</span>
+                                <div class="emotion-label">Happiness</div>
+                            </div>
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">😮</span>
+                                <div class="emotion-label">Surprise</div>
+                            </div>
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">😢</span>
+                                <div class="emotion-label">Sadness</div>
+                            </div>
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">😡</span>
+                                <div class="emotion-label">Anger</div>
+                            </div>
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">😱</span>
+                                <div class="emotion-label">Fear</div>
+                            </div>
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">🤢</span>
+                                <div class="emotion-label">Disgust</div>
+                            </div>
+                            <div class="emotion-card">
+                                <span class="emotion-emoji">😐</span>
+                                <div class="emotion-label">Neutral</div>
+                            </div>
+                        </div>
+
+                        <p class="tab-text" style="margin-top: 24px; margin-bottom: 32px;">
+                            Through advanced facial coding, we capture emotional reactions at the individual level, giving you clear, actionable insight into how audiences genuinely respond.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

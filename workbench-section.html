@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Human - Workbench Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://js-eu1.hsforms.net/forms/embed/146389151.js" defer></script>
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+            --dark-bg: #1a1a2e;
+            --card-bg: #2a2a3e;
+            --border-color: #3a3a4e;
+        }
+
+        .workbench-section * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+        }
+
+        .workbench-section {
+            font-family: inherit;
+            line-height: 1.6;
+            color: inherit;
+            background: inherit;
+        }
+
+        .workbench-section * {
+            box-sizing: border-box;
+        }
+
+        .workbench-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .workbench-wrapper {
+            padding: 40px 0;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-container {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-header {
+            background: var(--navy);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            gap: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Sidebar */
+        .dashboard-content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 30px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-item {
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #cccccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+
+        .nav-item.active {
+            background: rgba(0, 122, 255, 0.2);
+            color: var(--white);
+            border-left: 3px solid #007aff;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background: var(--dark-bg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+
+        .welcome-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .activities-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .activities-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .add-activity-btn {
+            background: #007aff;
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .add-activity-btn:hover {
+            background: #0056cc;
+            transform: translateY(-2px);
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-orange { background: #ff6b35; }
+        .dot-blue { background: #007aff; }
+        .dot-green { background: #54E42B; }
+        .dot-red { background: #F60000; }
+
+        /* Interactive Elements */
+        .interactive-element {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            transform: translateY(-2px);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: var(--navy);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 300px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .interactive-element:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Tooltip positioning */
+        .sidebar .tooltip {
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-left: 10px;
+            z-index: 1002;
+        }
+
+        .add-activity-btn .tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            z-index: 1002;
+        }
+
+        /* Activity card tooltips appear inside the card */
+        .activity-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card .tooltip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            transform: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .activity-card .tooltip {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(26, 26, 46, 0.99);
+                z-index: 99999;
+                border-radius: 0;
+            }
+
+            /* Completely disable all hover effects on mobile/tablet */
+            .activity-card:hover .tooltip {
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+
+            .activity-card:hover .activity-content {
+                opacity: 1 !important;
+            }
+
+            .activity-card:hover .activity-actions {
+                opacity: 1 !important;
+            }
+
+            .activity-card:hover .btn {
+                opacity: 1 !important;
+            }
+
+            .activity-card:hover .action-icons {
+                opacity: 1 !important;
+            }
+
+            /* Disable all transitions on mobile/tablet */
+            .activity-card,
+            .activity-card * {
+                transition: none !important;
+            }
+
+            /* Disable interactive element hover effects */
+            .interactive-element:hover {
+                transform: none !important;
+            }
+
+            /* Disable benchmark chart hover effects */
+            .activity-card:hover .benchmark-chart {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                display: none !important;
+            }
+        }
+
+        .activity-card:hover .activity-actions {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transition: opacity 0.3s ease;
+        }
+
+        .activity-card .tooltip h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .activity-card .tooltip p {
+            font-size: 1rem;
+            color: #cccccc;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Benchmarks hover functionality */
+        .activity-card:hover .activity-content {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .activity-card:hover .activity-actions {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ensure buttons remain clickable on hover */
+        .activity-card:hover .btn {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+        }
+
+        .activity-card:hover .action-icons {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+        }
+
+        .activity-card:hover .activity-actions {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* HubSpot Form Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        /* Prevent body scrolling when modal is active */
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 0;
+                padding: 0;
+                width: 80%;
+                max-width: none;
+                border-radius: 8px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .modal h3 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                margin: 0;
+                padding: 0;
+                width: 85%;
+            }
+
+            .modal h3 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .close {
+                font-size: 24px;
+                right: 15px;
+                top: 10px;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--white);
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        /* Benchmark Chart Styles */
+        .benchmark-chart {
+            margin: 0;
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0;
+            width: 100%;
+            overflow: visible;
+            flex: 1;
+            min-height: 200px;
+        }
+
+        .benchmark-category {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            width: 100%;
+            justify-content: flex-end;
+            max-width: calc(25% - 6px);
+        }
+
+        .benchmark-category h5 {
+            color: var(--white);
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            width: 100%;
+            overflow: visible;
+        }
+
+        .benchmark-bar-container {
+            width: 100%;
+            height: 120px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            padding: 8px;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .benchmark-bar {
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 0;
+            width: 50%;
+        }
+
+        .benchmark-bar.baseline {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .benchmark-bar.current {
+            background: linear-gradient(90deg, #00A0FF, #007AFF);
+            box-shadow: 0 8px 16px rgba(0, 160, 255, 0.6);
+            border: 1px solid rgba(0, 160, 255, 0.3);
+        }
+
+        /* Different heights for benchmark bars based on data */
+        /* All baseline bars are the same height */
+        .benchmark-bar.baseline {
+            height: 50px;
+        }
+
+        /* Current bars have different heights based on percentage */
+        .benchmark-bar-container.quality .benchmark-bar.current {
+            height: 67px; /* 6.7% = 67px */
+        }
+
+        .benchmark-bar-container.innovative .benchmark-bar.current {
+            height: 97px; /* 9.7% = 97px */
+        }
+
+        .benchmark-bar-container.relevant .benchmark-bar.current {
+            height: 85px; /* Reduced from 115px to be more proportional */
+        }
+
+        .benchmark-bar-container.trustworthy .benchmark-bar.current {
+            height: 80px; /* 8.0% = 80px */
+        }
+
+        .benchmark-value {
+            background: rgba(84, 228, 43, 0.15);
+            border: 1px solid rgba(84, 228, 43, 0.3);
+            border-radius: 4px;
+            padding: 4px 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            font-size: 0.6rem;
+        }
+
+        .benchmark-value span {
+            color: #54E42B;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .tooltip h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+
+        .tooltip p {
+            font-size: 0.9rem;
+            color: #cccccc;
+            line-height: 1.5;
+        }
+
+        /* Activity Cards */
+        .activity-cards {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            min-height: 380px;
+            flex-wrap: wrap;
+        }
+
+        .activity-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 380px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .activity-status {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff6b35;
+        }
+
+        .activity-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        .activity-details {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 200px;
+        }
+
+        .activity-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .activity-description {
+            color: #cccccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .activity-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 0.85rem;
+            color: #aaaaaa;
+        }
+
+        .activity-details div {
+            margin-bottom: 5px;
+        }
+
+        .activity-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+            padding-top: 5px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .btn-primary {
+            background: #007aff;
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #0056cc;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .workbench-container {
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            
+            .activity-cards {
+                gap: 8px;
+            }
+            
+            .activity-card {
+                min-width: 280px;
+                max-width: 350px;
+            }
+        }
+
+                @media (max-width: 768px) {
+            .workbench-wrapper {
+                padding: 30px 0;
+            }
+            
+            .activity-cards {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .activity-card {
+                min-width: 100%;
+                max-width: 100%;
+                height: 300px;
+            }
+            
+            .activity-card .tooltip {
+                z-index: 99999;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100vw;
+                height: 100vh;
+                transform: none;
+                background: rgba(26, 26, 46, 0.98);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            /* Mobile/Tablet click functionality */
+            .activity-card.mobile-active .tooltip {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .activity-card.mobile-active .activity-content {
+                opacity: 0.3;
+            }
+
+            .activity-card.mobile-active .activity-actions {
+                opacity: 0.3;
+            }
+        }
+
+        /* Benchmark Chart Styles */
+        .benchmark-chart {
+                gap: 10px;
+                min-height: 150px;
+            }
+            
+            .benchmark-category h5 {
+                font-size: 0.6rem;
+            }
+            
+            .benchmark-bar-container {
+                height: 80px;
+            }
+            
+            .benchmark-bar.baseline {
+                height: 40px;
+            }
+            
+            .benchmark-bar-container.quality .benchmark-bar.current {
+                height: 50px;
+            }
+            
+            .benchmark-bar-container.innovative .benchmark-bar.current {
+                height: 70px;
+            }
+            
+            .benchmark-bar-container.relevant .benchmark-bar.current {
+                height: 65px;
+            }
+            
+            .benchmark-bar-container.trustworthy .benchmark-bar.current {
+                height: 55px;
+            }
+            
+            .benchmark-value span {
+                font-size: 0.6rem;
+            }
+            
+            .activity-title {
+                font-size: 1rem;
+            }
+            
+            .activity-details {
+                font-size: 0.85rem;
+                min-height: 150px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .workbench-wrapper {
+                padding: 20px 0;
+            }
+            
+            .activity-cards {
+                gap: 12px;
+            }
+            
+            .activity-card {
+                padding: 15px;
+                height: 250px;
+            }
+            
+            .activity-card .tooltip {
+                z-index: 99999;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100vw;
+                height: 100vh;
+                transform: none;
+                background: rgba(26, 26, 46, 0.98);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .benchmark-chart {
+                gap: 8px;
+                min-height: 120px;
+            }
+            
+            .benchmark-category h5 {
+                font-size: 0.55rem;
+            }
+            
+            .benchmark-bar-container {
+                height: 60px;
+            }
+            
+            .benchmark-bar.baseline {
+                height: 30px;
+            }
+            
+            .benchmark-bar-container.quality .benchmark-bar.current {
+                height: 40px;
+            }
+            
+            .benchmark-bar-container.innovative .benchmark-bar.current {
+                height: 55px;
+            }
+            
+            .benchmark-bar-container.relevant .benchmark-bar.current {
+                height: 50px;
+            }
+            
+            .benchmark-bar-container.trustworthy .benchmark-bar.current {
+                height: 45px;
+            }
+            
+            .benchmark-value span {
+                font-size: 0.55rem;
+            }
+            
+            .activity-title {
+                font-size: 0.95rem;
+            }
+            
+            .activity-details {
+                font-size: 0.8rem;
+                min-height: 120px;
+            }
+            
+            .btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .action-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .action-icon:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .workbench-wrapper {
+                padding: 60px 0;
+            }
+
+            .workbench-header h2 {
+                font-size: 2rem;
+            }
+
+            .dashboard-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 20px 0;
+            }
+
+            .sidebar .tooltip {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                margin: 0;
+                width: 90%;
+                max-width: 300px;
+                z-index: 1002;
+            }
+
+            .activity-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .activity-card .tooltip {
+                padding: 15px;
+            }
+
+            .activity-card .tooltip h4 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .activity-card .tooltip p {
+                font-size: 0.9rem;
+            }
+
+            .workbench-container {
+                padding: 0 15px;
+            }
+
+            .brand-logo {
+                height: 28px;
+            }
+
+            .activities-header {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .add-activity-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+
+            .legend {
+                flex-wrap: wrap;
+                gap: 12px;
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+            .legend-item {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .workbench-wrapper {
+                padding: 40px 0;
+            }
+
+            .workbench-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .dashboard-header {
+                padding: 15px 20px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .activity-card {
+                padding: 15px;
+            }
+
+            .activity-card .tooltip {
+                padding: 10px;
+            }
+
+            .activity-card .tooltip h4 {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+
+            .activity-card .tooltip p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .workbench-container {
+                padding: 0 10px;
+            }
+
+            .brand-logo {
+                height: 16px;
+            }
+
+            .nav-item {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            .welcome-text {
+                font-size: 1.3rem;
+            }
+
+            .activities-title {
+                font-size: 1.1rem;
+            }
+
+            .activities-header {
+                gap: 15px;
+            }
+
+            .add-activity-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .legend {
+                gap: 8px;
+            }
+
+            .legend-item {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="workbench-section">
+        <section class="workbench-wrapper">
+            <div class="workbench-container">
+                
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <div class="logo-section">
+                            <img src="https://cdn.prod.website-files.com/5e943092459693077575d420/66ad117bdc6872a9185fe6f9_Elementhuman-logo.png" alt="Element Human" class="brand-logo">
+                        </div>
+                        <div class="user-section">
+                            <div class="user-avatar">U</div>
+                            <span>User</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="sidebar">
+                            <div class="nav-item active">
+                                <i>🏠</i>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item interactive-element">
+                                <i>📊</i>
+                                <span>Projects</span>
+                                <div class="tooltip">
+                                    <h4>Campaign Library</h4>
+                                    <p>Your Campaign Library keeps every study in one place so you can compare creatives, build benchmarks, and analyze trends across all your campaigns.</p>
+                                </div>
+                            </div>
+                            <div class="nav-item interactive-element">
+                                <i>📈</i>
+                                <span>Benchmarks</span>
+                                <div class="tooltip">
+                                    <h4>Benchmarks</h4>
+                                    <p>Start with confidence using Element Human's deep benchmarks across platforms, geographies, and industries. As you test, unlock your own brand-specific benchmarks for even sharper insights.</p>
+                                </div>
+                            </div>
+                            <div class="nav-item interactive-element">
+                                <i>🔍</i>
+                                <span>Usage</span>
+                                <div class="tooltip">
+                                    <h4>Meta-Analysis on Demand</h4>
+                                    <p>Meta-Analysis on Demand lets you dig deep into your dataset to reveal actionable patterns, or leverage our expert analysts for even sharper insights.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="main-content">
+                            <div class="welcome-section">
+                                <div class="welcome-text">Welcome, User</div>
+                            </div>
+                            
+                            <div class="activities-header">
+                                <div class="activities-title">
+                                    <span>📊</span>
+                                    <span>Activities</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <button class="add-activity-btn interactive-element">
+                                        <span>+</span>
+                                        <span>Add an activity</span>
+                                        <div class="tooltip">
+                                            <h4>Create New Study</h4>
+                                            <p>Start a new creative test with our intuitive setup wizard. Choose from templates or create a custom study tailored to your specific needs.</p>
+                                        </div>
+                                    </button>
+                                    <div class="legend">
+                                        <div class="legend-item">
+                                            <div class="legend-dot dot-orange"></div>
+                                            <span>In Development</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-dot dot-blue"></div>
+                                            <span>Completed</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-dot dot-green"></div>
+                                            <span>Live</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-dot dot-red"></div>
+                                            <span>Paused</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-cards">
+                                <div class="activity-card interactive-element">
+                                    <div class="activity-status"></div>
+                                    <div class="activity-title">Essentials Report</div>
+                                    <div class="activity-details">
+                                        <div class="activity-content">
+                                            <div class="activity-description">Essentials Report delivers quick, actionable results for every creative so you optimize with absolute confidence.</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="btn btn-primary" onclick="window.open('https://cdn.prod.website-files.com/5e943092459693077575d420/6891f2700a821d240da849ca_Element%20Human%20-%20Essentials%20Report.pdf', '_blank')" style="width: 100%;">Download Essentials Report</button>
+                                        <div class="action-icons">
+                                            <div class="action-icon">📋</div>
+                                            <div class="action-icon">🗑️</div>
+                                        </div>
+                                    </div>
+                                    <div class="tooltip">
+                                        <button class="btn btn-primary" onclick="window.open('https://cdn.prod.website-files.com/5e943092459693077575d420/6891f2700a821d240da849ca_Element%20Human%20-%20Essentials%20Report.pdf', '_blank')" style="width: 280px; height: 55px; font-size: 1rem;">Download Essentials Report</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-card interactive-element">
+                                    <div class="activity-status"></div>
+                                    <div class="activity-title">Full Report</div>
+                                    <div class="activity-details">
+                                        <div class="activity-content">
+                                            <div class="activity-description">Full Report unlocks deep-dive insights with full-funnel diagnostics, creative learnings, and strategic narratives to shape your next move.</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="btn btn-primary" onclick="openFullReportModal()" style="width: 100%;">Download Full Report</button>
+                                        <div class="action-icons">
+                                            <div class="action-icon">📋</div>
+                                            <div class="action-icon">🗑️</div>
+                                        </div>
+                                    </div>
+                                    <div class="tooltip">
+                                        <button class="btn btn-primary" onclick="openFullReportModal()" style="width: 280px; height: 55px; font-size: 1rem;">Download Full Report</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-card interactive-element">
+                                    <div class="activity-status"></div>
+                                    <div class="activity-title">Benchmarks</div>
+                                    <div class="activity-details">
+                                        <div class="activity-content">
+                                            <div class="activity-description">Start with confidence using Element Human's deep benchmarks across platforms, geographies, and industries.<br><br>As you test, unlock your own brand-specific benchmarks for even sharper insights.</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="btn btn-outline">Open</button>
+                                        <button class="btn btn-primary">Edit</button>
+                                        <div class="action-icons">
+                                            <div class="action-icon">📋</div>
+                                            <div class="action-icon">🗑️</div>
+                                        </div>
+                                    </div>
+                                    <div class="tooltip">
+                                        <div class="benchmark-chart">
+                                            <div class="benchmark-category">
+                                                <h5>QUALITY</h5>
+                                                <div class="benchmark-bar-container quality">
+                                                    <div class="benchmark-bar baseline"></div>
+                                                    <div class="benchmark-bar current"></div>
+                                                </div>
+                                                <div class="benchmark-value">
+                                                    <span>+6.7%</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="benchmark-category">
+                                                <h5>INNOVATIVE</h5>
+                                                <div class="benchmark-bar-container innovative">
+                                                    <div class="benchmark-bar baseline"></div>
+                                                    <div class="benchmark-bar current"></div>
+                                                </div>
+                                                <div class="benchmark-value">
+                                                    <span>+9.7%</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="benchmark-category">
+                                                <h5>RELEVANT</h5>
+                                                <div class="benchmark-bar-container relevant">
+                                                    <div class="benchmark-bar baseline"></div>
+                                                    <div class="benchmark-bar current"></div>
+                                                </div>
+                                                <div class="benchmark-value">
+                                                    <span>+11.5%*</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="benchmark-category">
+                                                <h5>TRUSTWORTHY</h5>
+                                                <div class="benchmark-bar-container trustworthy">
+                                                    <div class="benchmark-bar baseline"></div>
+                                                    <div class="benchmark-bar current"></div>
+                                                </div>
+                                                <div class="benchmark-value">
+                                                    <span>+8.0%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- HubSpot Form Modal -->
+    <div id="fullReportModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFullReportModal()">&times;</span>
+            <div class="hs-form-frame" data-region="eu1" data-form-id="2b173de6-ef53-427c-9e6e-c4a03b0f66e9" data-portal-id="146389151"></div>
+        </div>
+    </div>
+
+    <script>
+        function openFullReportModal() {
+            document.getElementById('fullReportModal').style.display = 'block';
+            document.body.classList.add('modal-open');
+        }
+
+        function closeFullReportModal() {
+            document.getElementById('fullReportModal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('fullReportModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }
+        }
+    </script>
+</body>
+</html> 

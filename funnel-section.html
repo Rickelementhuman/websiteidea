@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Human - Funnel Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .element-human-funnel * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .element-human-funnel {
+            font-family: inherit;
+            line-height: 1.6;
+            color: inherit;
+            background: inherit;
+        }
+
+        .element-human-funnel * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        /* Button Styles - New Design */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--white);
+            color: #007aff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #007aff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
+        }
+
+        .cta-button:hover {
+            background: #007aff;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+        }
+
+        /* CTA Center */
+        .cta-center {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+        }
+
+        .cta-center .tab-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .cta-center .highlight {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .cta-center .cta-button {
+            font-size: 1.1rem;
+            padding: 18px 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-header {
+                margin-bottom: 60px;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+            }
+
+            .section-header .tab-text {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+            }
+
+            .section-header .tab-text {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Funnel Section Specific Styles */
+        .funnel-section {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .funnel-section * {
+            box-sizing: border-box;
+        }
+
+        .funnel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .funnel-section-wrapper {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .section-header .tab-text {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        .funnel-description {
+            text-align: center;
+            margin-bottom: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .funnel-description p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .funnel-description p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Progression Bar Styles */
+        .funnel-progression {
+            position: relative;
+        }
+
+        .funnel-progression-line {
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+        }
+
+        .funnel-progression-fill {
+            position: absolute;
+            left: 50px;
+            top: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #007aff, #1a1a2e);
+            border-radius: 2px;
+            transition: height 0.3s ease;
+            height: 0;
+        }
+
+        .funnel-stage {
+            position: relative;
+            margin-bottom: 80px;
+            padding-left: 100px;
+            opacity: 0.3;
+            transition: opacity 0.5s ease;
+        }
+
+        .funnel-stage.active {
+            opacity: 1;
+        }
+
+        .funnel-stage-indicator {
+            position: absolute;
+            left: 42px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .funnel-stage.active .funnel-stage-indicator {
+            background: #007aff;
+            transform: scale(1.2);
+        }
+
+        .funnel-stage-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .funnel-stage-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .funnel-stage-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .funnel-stage-subtitle {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .funnel-stage-details {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid transparent;
+            transition: all 0.5s ease;
+            opacity: 0.3;
+        }
+
+        .funnel-stage.active .funnel-stage-details {
+            border-left-color: #007aff;
+            box-shadow: 0 8px 30px rgba(0, 122, 255, 0.15);
+            opacity: 1;
+        }
+
+        .funnel-stage-description {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .funnel-stage-subheader {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            text-align: left;
+        }
+
+        .funnel-metrics-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .funnel-metric-item {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .funnel-metric-item:hover {
+            border-color: #007aff;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);
+        }
+
+        .funnel-metric-item.expanded {
+            border-color: #007aff;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15);
+        }
+
+        .funnel-metric-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 20px;
+            background: var(--light-gray);
+            transition: background 0.3s ease;
+        }
+
+        .funnel-metric-item.expanded .funnel-metric-header {
+            background: #f0f8ff;
+        }
+
+        .funnel-metric-content h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin: 0 0 4px 0;
+            text-align: left;
+        }
+
+        .funnel-metric-content p {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin: 0;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .funnel-metric-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            background: var(--white);
+        }
+
+        .funnel-metric-item.expanded .funnel-metric-details {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .funnel-metric-details-content {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .funnel-metric-details p {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .funnel-metric-details ul {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin: 0;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .funnel-metric-details li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .funnel-section-wrapper {
+                padding: 60px 0;
+            }
+
+            .funnel-progression {
+                padding-left: 20px;
+            }
+
+            .funnel-progression-line,
+            .funnel-progression-fill {
+                left: 30px;
+            }
+
+            .funnel-stage-indicator {
+                left: 22px;
+            }
+
+            .funnel-stage {
+                padding-left: 60px;
+                margin-bottom: 60px;
+            }
+
+            .funnel-stage-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .funnel-stage-header {
+                flex-direction: column;
+                text-align: left;
+                gap: 10px;
+            }
+
+            .funnel-stage-title {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+
+            .funnel-stage-subtitle {
+                font-size: 1rem;
+            }
+
+            .funnel-stage-details {
+                padding: 20px;
+            }
+
+            .funnel-stage-subheader {
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+
+            .funnel-stage-description {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .funnel-metrics-grid {
+                gap: 15px;
+            }
+
+            .funnel-metric-item {
+                padding: 12px;
+            }
+
+            .funnel-container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .funnel-section-wrapper {
+                padding: 40px 0;
+            }
+
+            .funnel-stage {
+                padding-left: 50px;
+                margin-bottom: 50px;
+            }
+
+            .funnel-stage-indicator {
+                left: 18px;
+                width: 16px;
+                height: 16px;
+            }
+
+            .funnel-progression-line,
+            .funnel-progression-fill {
+                left: 24px;
+                width: 3px;
+            }
+
+            .funnel-stage-title {
+                font-size: 1.5rem;
+                margin-bottom: 6px;
+            }
+
+            .funnel-stage-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .funnel-stage-details {
+                padding: 15px;
+            }
+
+            .funnel-stage-subheader {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+
+            .funnel-stage-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: 15px;
+            }
+
+            .funnel-metrics-grid {
+                gap: 12px;
+            }
+
+            .funnel-metric-item {
+                padding: 10px;
+            }
+
+            .funnel-container {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .funnel-stage-title {
+                font-size: 1.3rem;
+            }
+
+            .funnel-stage-subheader {
+                font-size: 1rem;
+            }
+
+            .funnel-stage-description {
+                font-size: 0.85rem;
+            }
+
+            .funnel-stage {
+                padding-left: 45px;
+                margin-bottom: 40px;
+            }
+
+            .funnel-stage-indicator {
+                left: 16px;
+                width: 14px;
+                height: 14px;
+            }
+
+            .funnel-progression-line,
+            .funnel-progression-fill {
+                left: 22px;
+                width: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="funnel-section">
+        <section class="funnel-section-wrapper">
+            <div class="funnel-container">
+                <div class="funnel-progression">
+                    <div class="funnel-progression-line"></div>
+                    <div class="funnel-progression-fill" id="funnelProgressionFill"></div>
+                    
+                    <div class="funnel-stage" id="upperFunnel">
+                        <div class="funnel-stage-indicator"></div>
+                        <div class="funnel-stage-content">
+                            <div class="funnel-stage-header">
+                                <div>
+                                    <h3 class="funnel-stage-title">Upper Funnel</h3>
+                                    <p class="funnel-stage-subtitle">Awareness and initial emotional response</p>
+                                </div>
+                            </div>
+                            <div class="funnel-stage-details">
+                                <h4 class="funnel-stage-subheader">Early-Stage Impact</h4>
+                                <p class="funnel-stage-description">Capture attention in the feed and emotional resonance to see immediate impact.</p>
+                                <div class="funnel-metrics-grid">
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>📣 Attention in Feed</h5>
+                                                <p>How quickly your creative captures attention</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Attention in Feed measures the immediate visual impact and stopping power of your creative content within the social media environment. This captures the critical first few seconds when users decide whether to engage or scroll past your content.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>🧠 Brand Recall</h5>
+                                                <p>How well your brand is remembered</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Brand Recall measures the effectiveness of your creative in building lasting brand memory and recognition. This determines how well your brand sticks in the audience's mind after exposure to your content.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>🔥 Unaided/Aided Awareness</h5>
+                                                <p>Brand recognition levels</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Unaided/Aided Awareness tracks both spontaneous and prompted brand recognition to understand how well your creative builds brand awareness. This reveals whether your brand comes to mind naturally or only when prompted.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="funnel-stage" id="midFunnel">
+                        <div class="funnel-stage-indicator"></div>
+                        <div class="funnel-stage-content">
+                            <div class="funnel-stage-header">
+                                <div>
+                                    <h3 class="funnel-stage-title">Mid Funnel</h3>
+                                    <p class="funnel-stage-subtitle">Brand recall, favorability, and consideration</p>
+                                </div>
+                            </div>
+                            <div class="funnel-stage-details">
+                                <h4 class="funnel-stage-subheader">Engagement & Consideration</h4>
+                                <p class="funnel-stage-description">Define how well your message lands and moves beyond awareness to genuine engagement.</p>
+                                <div class="funnel-metrics-grid">
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>💡 Emotional Response</h5>
+                                                <p>Immediate emotional reactions</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Emotional Response captures the raw emotional reactions that occur within the first few seconds of exposure to your creative. This reveals the immediate psychological impact and emotional resonance of your content.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>🧪 Implicit Brand Associations</h5>
+                                                <p>Subconscious brand connections</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Implicit Brand Associations uncover the subconscious connections and associations that your creative builds with your brand at a deeper psychological level. This reveals the hidden emotional and cognitive links formed with your brand.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>❤️ Brand Favorability</h5>
+                                                <p>Positive associations with your brand</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Brand Favorability assesses the positive emotional connections and associations that your creative builds with your brand identity. This measures how well your content creates positive sentiment toward your brand.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>💬 Consideration</h5>
+                                                <p>Likelihood to consider your product/service</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Consideration evaluates how effectively your creative moves audiences from awareness to genuine consideration of your product or service. This measures the transition from knowing about your brand to actively thinking about choosing it.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="funnel-stage" id="lowerFunnel">
+                        <div class="funnel-stage-indicator"></div>
+                        <div class="funnel-stage-content">
+                            <div class="funnel-stage-header">
+                                <div>
+                                    <h3 class="funnel-stage-title">Lower Funnel</h3>
+                                    <p class="funnel-stage-subtitle">Purchase intent and recommendation</p>
+                                </div>
+                            </div>
+                            <div class="funnel-stage-details">
+                                <h4 class="funnel-stage-subheader">Conversion & Business Impact</h4>
+                                <p class="funnel-stage-description">Decode signals offering direct insight into ROI and the true business impact of your creative work.</p>
+                                <div class="funnel-metrics-grid">
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>🛒 Purchase Intent</h5>
+                                                <p>Likelihood to buy your product</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Purchase Intent measures the direct impact of your creative on purchase intention and buying behavior among your target audience. This reveals how effectively your content moves people toward making a purchase decision.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="funnel-metric-item" onclick="toggleFunnelMetric(this)">
+                                        <div class="funnel-metric-header">
+                                            <div class="funnel-metric-content">
+                                                <h5>🤝 Recommendation</h5>
+                                                <p>Willingness to recommend to others</p>
+                                            </div>
+                                        </div>
+                                        <div class="funnel-metric-details">
+                                            <div class="funnel-metric-details-content">
+                                                <p>Recommendation assesses the viral potential and word-of-mouth impact of your creative through recommendation likelihood and sharing behavior. This measures how likely people are to share your brand with others.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Funnel progression bar functionality
+        function updateFunnelProgression() {
+            const stages = document.querySelectorAll('.funnel-stage');
+            const progressionFill = document.getElementById('funnelProgressionFill');
+            const section = document.querySelector('.funnel-progression');
+            
+            if (!section || !progressionFill) {
+                console.log('Elements not found:', { section: !!section, progressionFill: !!progressionFill });
+                return;
+            }
+            
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollTop = window.pageYOffset;
+            
+            // Calculate scroll progress through the section
+            const sectionStart = sectionTop - windowHeight;
+            const sectionEnd = sectionTop + sectionHeight;
+            const scrollProgress = (scrollTop - sectionStart) / (sectionEnd - sectionStart);
+            
+            // Clamp progress between 0 and 1
+            const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+            
+            // Update progression fill
+            const fillHeight = sectionHeight * clampedProgress;
+            progressionFill.style.height = `${fillHeight}px`;
+            
+            console.log('Progress update:', {
+                scrollTop,
+                sectionTop,
+                sectionHeight,
+                scrollProgress: clampedProgress,
+                fillHeight
+            });
+            
+            // Update active stages based on scroll position
+            stages.forEach((stage, index) => {
+                const stageTop = stage.offsetTop - sectionTop;
+                const stageBottom = stageTop + stage.offsetHeight;
+                const viewportCenter = scrollTop + windowHeight * 0.5;
+                const stageCenter = sectionTop + stageTop + stage.offsetHeight / 2;
+                
+                // Activate when stage center passes viewport center
+                const stageVisible = viewportCenter > stageCenter;
+                
+                if (stageVisible) {
+                    stage.classList.add('active');
+                } else {
+                    stage.classList.remove('active');
+                }
+            });
+        }
+
+        // Funnel metric toggle functionality
+        function toggleFunnelMetric(metricItem) {
+            // Close all other metric items first
+            const allMetrics = document.querySelectorAll('.funnel-metric-item');
+            allMetrics.forEach(item => {
+                if (item !== metricItem) {
+                    item.classList.remove('expanded');
+                }
+            });
+            
+            // Toggle the clicked metric item
+            metricItem.classList.toggle('expanded');
+        }
+        
+        // Initialize immediately
+        function initFunnelProgression() {
+            console.log('Initializing funnel progression...');
+            updateFunnelProgression();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', function() {
+                requestAnimationFrame(updateFunnelProgression);
+            });
+            
+            // Add resize event listener
+            window.addEventListener('resize', function() {
+                requestAnimationFrame(updateFunnelProgression);
+            });
+            
+            console.log('Funnel progression initialized');
+        }
+        
+        // Run immediately if DOM is ready, otherwise wait
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initFunnelProgression);
+        } else {
+            initFunnelProgression();
+        }
+        
+        // Also run after a short delay to ensure everything is loaded
+        setTimeout(initFunnelProgression, 500);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Human - Every Impression Has a Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #54E42B;
+            --magenta: #FF2198;
+            --cyan: #10A8B7;
+            --violet: #8F21A1;
+            --navy: #13202F;
+            --yellow: #F9BE00;
+            --red: #F60000;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #495057;
+        }
+
+        .element-human-landing * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--violet) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--green), var(--cyan));
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section:nth-child(even) {
+            background: var(--light-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-text {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .content-text p {
+            margin-bottom: 20px;
+        }
+
+        .content-image {
+            text-align: center;
+        }
+
+        .content-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .feature-card p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Funnel Section */
+        .funnel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .funnel-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .funnel-card h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .funnel-metrics {
+            list-style: none;
+        }
+
+        .funnel-metrics li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--dark-gray);
+        }
+
+        /* Emotion Grid */
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .emotion-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .emotion-item span {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .emotion-item p {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--navy);
+        }
+
+        /* Why Choose Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .why-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .why-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .why-card p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .funnel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Every Impression Has a Story. We Reveal It.</h1>
+            <p>Most measurement tools tell you what happened. We tell you why. Real brand impact is not captured by surface-level metrics. It lives in the milliseconds where attention ignites, emotion connects, and memory shapes decisions.</p>
+            <p>Element Human illuminates these unseen moments, transforming your creative into something audiences never forget.</p>
+            <a href="#" class="cta-button">👉 Reveal Why It Matters</a>
+        </div>
+    </section>
+
+    <!-- Workbench Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Workbench</h2>
+                <p>From Insight to Action</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Workbench is your complete command center, an always-accessible dashboard that puts actionable intelligence directly in your hands. Every study lives on the platform, offering intuitive navigation through all your data, campaigns, and creative tests. Instantly explore performance, uncover patterns, and see what truly drives attention, emotion, and memory across campaigns.</p>
+                    
+                    <h3>What sets Workbench apart:</h3>
+                    <ul>
+                        <li><strong>Essentials Report</strong> delivers quick, actionable results for every creative so you optimize with absolute confidence.</li>
+                        <li><strong>Full Report</strong> unlocks deep-dive insights with full-funnel diagnostics, creative learnings, and strategic narratives to shape your next move.</li>
+                        <li>Access the full dashboard at any time—self-service gives you immediate insights at the close of fieldwork, while Managed Service customers receive either a comprehensive Full Report or Essentials Report for every creative tested, delivered with speed and precision.</li>
+                    </ul>
+                    
+                    <p>Workbench doesn't just deliver data. It gives you the competitive advantage to push creative performance to its peak.</p>
+                    <a href="#" class="cta-button">👉 Explore Workbench</a>
+                </div>
+                <div class="content-image">
+                    <img src="https://via.placeholder.com/500x400/10A8B7/ffffff?text=Workbench+Dashboard" alt="Workbench Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Funnel Measurement Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Full Funnel Measurement</h2>
+                <p>Measure Success from Start to Finish</p>
+            </div>
+            <div class="content-text" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p>Do not settle for "did it work." Element Human's full-funnel approach goes further by uncovering why it worked—or why it did not—and shows you exactly how to improve your next campaign.</p>
+                <p>Through full-funnel measurement, we unravel the decision-making journey at every stage with strategic precision.</p>
+            </div>
+            
+            <div class="funnel-grid">
+                <div class="funnel-card">
+                    <h4>Upper Funnel</h4>
+                    <p>metrics reveal awareness and initial emotional response. Capture attention in the feed and emotional resonance to see immediate impact.</p>
+                    <ul class="funnel-metrics">
+                        <li>📣 Attention in Feed</li>
+                        <li>💡 Emotional Response</li>
+                        <li>🔥 Unaided/Aided Awareness</li>
+                    </ul>
+                </div>
+                <div class="funnel-card">
+                    <h4>Mid Funnel</h4>
+                    <p>steps into brand recall, favorability, and consumer consideration, defining how well your message lands.</p>
+                    <ul class="funnel-metrics">
+                        <li>🧠 Brand Recall</li>
+                        <li>❤️ Brand Favorability</li>
+                        <li>💬 Consideration</li>
+                    </ul>
+                </div>
+                <div class="funnel-card">
+                    <h4>Lower Funnel</h4>
+                    <p>decodes signals like purchase intent, implicit brand associations, and likelihood to recommend, offering direct insight into ROI.</p>
+                    <ul class="funnel-metrics">
+                        <li>🛒 Purchase Intent</li>
+                        <li>🧪 Implicit Brand Associations</li>
+                        <li>🤝 Recommendation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--navy);">Other studies measure the outcome. We decode the journey.</p>
+                <a href="#" class="cta-button">👉 See the Full Picture</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Behavioral Learning Models Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Behavioral Learning Models</h2>
+                <p>The Science Behind Emotion</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-image">
+                    <img src="https://via.placeholder.com/500x400/FF2198/ffffff?text=Emotion+Analysis" alt="Emotion Analysis">
+                </div>
+                <div class="content-text">
+                    <p>Element Human transforms emotion into a measurable catalyst for growth through advanced behavioral learning models. By leveraging Ekman's seven universal emotions, we reveal the unique emotional signature every creative leaves behind, empowering predictive insights that resonate across markets and demographics.</p>
+                    
+                    <p>Here's how we decode the core drivers of human response:</p>
+                    
+                    <div class="emotion-grid">
+                        <div class="emotion-item">
+                            <span>😊</span>
+                            <p>Happiness</p>
+                        </div>
+                        <div class="emotion-item">
+                            <span>😮</span>
+                            <p>Surprise</p>
+                        </div>
+                        <div class="emotion-item">
+                            <span>😢</span>
+                            <p>Sadness</p>
+                        </div>
+                        <div class="emotion-item">
+                            <span>😡</span>
+                            <p>Anger</p>
+                        </div>
+                        <div class="emotion-item">
+                            <span>😱</span>
+                            <p>Fear</p>
+                        </div>
+                        <div class="emotion-item">
+                            <span>🤢</span>
+                            <p>Disgust</p>
+                        </div>
+                        <div class="emotion-item">
+                            <span>😐</span>
+                            <p>Neutral</p>
+                        </div>
+                    </div>
+                    
+                    <p>Each of these expressions is captured and analyzed at the respondent level through facial coding, so you gain unmatched clarity into how audiences genuinely respond to your creative.</p>
+                    
+                    <p>Our science-first approach replaces guesswork with precise emotional intelligence, helping you understand exactly what motivates, moves, or even disengages your audience.</p>
+                    
+                    <a href="#" class="cta-button">👉 Decode What Moves Them</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopping & Staying Power Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Stopping & Staying Power™</h2>
+                <p>Unlocking Lasting Impact</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Capturing attention in today's crowded landscape is only the beginning. True brand growth demands retention—a level of engagement that persists beyond the moment your creative appears. Stopping & Staying Power™ (SSP) is Element Human's proprietary framework that combines the scientific rigor of biometrics and Implicit Association Testing to deliver a multidimensional understanding of creative performance.</p>
+                    
+                    <p>SSP uses biometric signals, measuring authentic physiological responses as viewers encounter your campaign. These real-time insights reveal the precise moment your content interrupts the scroll and how powerfully it disrupts the sea of competing messages. Through Implicit Association Testing, we then gauge the depth and speed of brand associations formed, a measure that predicts whether your messaging will take root in long-term memory and influence future decisions.</p>
+                    
+                    <p>This dual-lens approach ensures your assets are meticulously evaluated for both immediate stopping power and enduring staying power. You learn not just which creative captures initial attention, but which campaigns resonate deeply, embedding your brand message in the consumer's mind for lasting impact.</p>
+                    
+                    <p>Every Essentials and Full Report on Workbench features SSP, supporting your team with actionable guidance for in-flight optimization and arming you with the certainty to deploy high-performing creative at scale.</p>
+                    
+                    
+                </div>
+                <div class="content-image">
+                    <img src="https://via.placeholder.com/500x400/54E42B/ffffff?text=SSP+Framework" alt="SSP Framework">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Reach Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Global Reach, Local Relevance</h2>
+                <p>Element Human gives you the power to see what moves people anywhere in the world. Our insights are both scalable and finely tuned to the cultural nuances that shape real human response.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🌍 100M+ panellists worldwide</h4>
+                    <p>for rich, diverse audience insights</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🗺 26 markets and 8 languages</h4>
+                    <p>tested with tailored cultural sensitivity</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📊 150+ brand categories</h4>
+                    <p>to compare performance with confidence</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📈 Global benchmarks</h4>
+                    <p>built from thousands of studies to show what great looks like in every market</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔗 Unified data</h4>
+                    <p>across local activations and global campaigns</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--navy);">Wherever your audience lives, we help you validate creative performance with authority and uncover the emotional triggers that drive action.</p>
+                <a href="#" class="cta-button">👉 Reach Audiences Everywhere</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Element Human?</h2>
+                <p>Where others follow conventions, Element Human sets new standards.</p>
+            </div>
+            
+            <div class="why-grid">
+                <div class="why-card">
+                    <h4>Behavioural Science</h4>
+                    <p>Integrates eye tracking, facial coding, Implicit Association Testing, brand metrics to capture genuine emotion and deep memory, going far beyond what audiences see to what they feel and remember.</p>
+                </div>
+                <div class="why-card">
+                    <h4>In-context testing</h4>
+                    <p>Mirrors the real environments where your content lives, delivering insights grounded in how people actually see, feel, and respond.</p>
+                </div>
+                <div class="why-card">
+                    <h4>Rapid Turnaround</h4>
+                    <p>Delivers results in as little as twenty-four hours, proving that speed never has to mean sacrificing depth or quality.</p>
+                </div>
+                <div class="why-card">
+                    <h4>Clean, Validated Data</h4>
+                    <p>Means your results are driven by authentic responses with no bots, no noise, and no guesswork.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</body>
+</html>
