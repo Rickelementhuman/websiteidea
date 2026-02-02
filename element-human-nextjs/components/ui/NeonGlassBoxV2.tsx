@@ -7,6 +7,7 @@ type GlowPosition = 'corners' | 'top-bottom' | 'left-right' | 'top-left' | 'top-
 interface NeonGlassBoxV2Props {
   children: ReactNode
   className?: string
+  style?: React.CSSProperties
   borderRadius?: number
   topHue?: number
   bottomHue?: number
@@ -21,6 +22,7 @@ interface NeonGlassBoxV2Props {
 export function NeonGlassBoxV2({
   children,
   className = '',
+  style: styleProp,
   borderRadius = 32,
   topHue = 183,
   bottomHue = 120,
@@ -120,7 +122,7 @@ export function NeonGlassBoxV2({
   }
 
   return (
-    <div className={`neon-glass-box ${className}`} style={cssVars}>
+    <div className={`neon-glass-box ${className}`} style={{ ...cssVars, ...styleProp }}>
       {renderGlowElements()}
       {children}
     </div>
