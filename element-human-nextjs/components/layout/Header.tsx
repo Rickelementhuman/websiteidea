@@ -13,12 +13,13 @@ export function Header() {
     { label: 'Science', href: '/science' },
     { label: 'About Us', href: '/about' },
     { label: 'Insights', href: '/insights' },
-    { label: 'Landing 1', href: '/landing' },
-    { label: 'Landing 2', href: '/landing-2' },
-    { label: 'Style A', href: '/landing-a' },
-    { label: 'Style B', href: '/landing-b' },
-    { label: 'Style C', href: '/landing-c' },
-    { label: 'Style D', href: '/landing-d' },
+    // Persona Landing Pages
+    { label: 'Growth (Magnet)', href: '/growth-1' },
+    { label: 'Growth (Form)', href: '/growth-1-form' },
+    { label: 'Analysts (Magnet)', href: '/analysts' },
+    { label: 'Analysts (Form)', href: '/analysts-form' },
+    { label: 'Budget (Magnet)', href: '/budget-holders' },
+    { label: 'Budget (Form)', href: '/budget-holders-form' },
   ]
 
   return (
