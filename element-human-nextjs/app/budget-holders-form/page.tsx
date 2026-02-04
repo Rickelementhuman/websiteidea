@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { NeonGlassBoxV2 } from '@/components/ui/NeonGlassBoxV2'
 import { BackgroundCircles } from '@/components/ui/BackgroundCircles'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import '../neon-glass.css'
 
@@ -208,22 +209,30 @@ export default function BudgetHoldersLeadForm() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
                 <span className="text-white">Your CFO Asks What Your $500K Influencer Spend Delivered. </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#F9BE00] to-[#E0A800]">
                   What Do You Say?
                 </span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-white/70 mb-6 max-w-3xl mx-auto">
+              {/* Aha Moment GIF */}
+              <div className="mb-8">
+                <Image
+                  src="/images/aha-moment.gif"
+                  alt="Element Human emotion tracking and attention heatmap visualization"
+                  width={800}
+                  height={500}
+                  className="mx-auto rounded-2xl shadow-2xl"
+                  unoptimized
+                />
+              </div>
+
+              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
                 Likes don't pay the bills. Brand lift does. Get the data that makes CFOs listen—and budgets stick.
               </p>
 
-              <p className="text-lg text-white/50 mb-10 max-w-2xl mx-auto">
-                Stop scrambling every quarter. Get independent, third-party data that proves your influencer campaigns actually work—with the statistical rigor that finance teams demand.
-              </p>
-
-              <div className="flex flex-col items-center gap-4 mb-8">
+              <div className="flex flex-col items-center gap-4">
                 <Link href="#demo">
                   <motion.button
                     className="px-10 py-5 rounded-full font-semibold text-lg"

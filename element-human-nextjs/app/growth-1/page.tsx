@@ -131,22 +131,30 @@ export default function Growth1LeadMagnet() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
                 <span className="text-white">Your Competitor Just Won a Pitch </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#FF2198] to-[#E01580]">
                   You Should Have Won
                 </span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-white/70 mb-6 max-w-3xl mx-auto">
+              {/* Aha Moment GIF */}
+              <div className="mb-8">
+                <Image
+                  src="/images/aha-moment.gif"
+                  alt="Element Human emotion tracking and attention heatmap visualization"
+                  width={800}
+                  height={500}
+                  className="mx-auto rounded-2xl shadow-2xl"
+                  unoptimized
+                />
+              </div>
+
+              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
                 They showed up with emotion data, attention tracking, and heat maps. You showed up with engagement metrics. The client noticed.
               </p>
 
-              <p className="text-lg text-white/50 mb-10 max-w-2xl mx-auto">
-                Advanced measurement isn't a nice-to-have anymore—it's what separates agencies that win from agencies that wonder what went wrong.
-              </p>
-
-              <div className="flex flex-col items-center gap-4 mb-8">
+              <div className="flex flex-col items-center gap-4">
                 <Link href="#download">
                   <motion.button
                     className="px-10 py-5 rounded-full font-semibold text-lg"

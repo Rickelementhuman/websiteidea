@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { NeonGlassBoxV2 } from '@/components/ui/NeonGlassBoxV2'
 import { BackgroundCircles } from '@/components/ui/BackgroundCircles'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import '../neon-glass.css'
 
@@ -209,22 +210,30 @@ export default function AnalystsLeadForm() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
                 <span className="text-white">You Know What Happened. </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#12B8C9] to-[#0E98A5]">
                   Do You Know Why?
                 </span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-white/70 mb-6 max-w-3xl mx-auto">
+              {/* Aha Moment GIF */}
+              <div className="mb-8">
+                <Image
+                  src="/images/aha-moment.gif"
+                  alt="Element Human emotion tracking and attention heatmap visualization"
+                  width={800}
+                  height={500}
+                  className="mx-auto rounded-2xl shadow-2xl"
+                  unoptimized
+                />
+              </div>
+
+              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
                 Clicks tell you what. Emotion tells you why. Get the data that turns "I don't know" into "Here's exactly why."
               </p>
 
-              <p className="text-lg text-white/50 mb-10 max-w-2xl mx-auto">
-                Stop reporting numbers. Start explaining meaning. See how leading brands are using emotion and attention data to finally answer the questions that engagement metrics can't.
-              </p>
-
-              <div className="flex flex-col items-center gap-4 mb-8">
+              <div className="flex flex-col items-center gap-4">
                 <Link href="#demo">
                   <motion.button
                     className="px-10 py-5 rounded-full font-semibold text-lg"
