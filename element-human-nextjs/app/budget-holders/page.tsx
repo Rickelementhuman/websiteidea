@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { NeonGlassBoxV2 } from '@/components/ui/NeonGlassBoxV2'
 import { BackgroundCircles } from '@/components/ui/BackgroundCircles'
 import Link from 'next/link'
+import Image from 'next/image'
 import '../neon-glass.css'
 
 function GradientDivider({ color = '#12B8C9' }: { color?: string }) {
@@ -525,6 +526,16 @@ export default function BudgetHoldersLeadMagnet() {
                   <p className="text-lg text-white/60 mb-8 max-w-xl mx-auto">
                     Get our guide to presenting influencer ROI to finance teams. Learn how to translate brand lift data into the language CFOs understand—and get your budget approved.
                   </p>
+
+                  <div className="mb-8">
+                    <Image
+                      src="/images/lead-magnet-book.png"
+                      alt="Proving Creative Effectiveness in 2026 - Free Guide"
+                      width={300}
+                      height={400}
+                      className="mx-auto drop-shadow-2xl"
+                    />
+                  </div>
 
                   <Link href="#">
                     <motion.button
