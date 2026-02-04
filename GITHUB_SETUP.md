@@ -11,8 +11,8 @@ So commits from this folder use the right name and email:
 ```bash
 cd /Users/rickvandenkommer/Documents/NewEHWebsite
 
-git config --local user.name "Your Name for This Account"
-git config --local user.email "your-email@example.com"
+git config --local user.name "Rick EH"
+git config --local user.email "rick@elementhuman.com"
 ```
 
 Use the name and email of the GitHub account you want for **this** repo. Other repos keep using your global Git config.

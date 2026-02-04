@@ -217,15 +217,15 @@ export default function Growth1LeadForm() {
                 </span>
               </h1>
 
-              {/* Aha Moment GIF */}
+              {/* Aha Moment Video */}
               <div className="mb-8">
-                <Image
-                  src="/images/aha-moment.gif"
-                  alt="Element Human emotion tracking and attention heatmap visualization"
-                  width={800}
-                  height={500}
-                  className="mx-auto rounded-2xl shadow-2xl"
-                  unoptimized
+                <video
+                  src="/images/aha-moment.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="mx-auto rounded-2xl shadow-2xl w-full max-w-3xl"
                 />
               </div>
 
