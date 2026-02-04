@@ -217,15 +217,26 @@ export default function BudgetHoldersLeadForm() {
               </h1>
 
               {/* Aha Moment Video */}
-              <div className="mb-8">
-                <video
-                  src="/images/aha-moment.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="mx-auto rounded-2xl shadow-2xl w-full max-w-3xl"
-                />
+              <div className="mb-8 max-w-3xl mx-auto">
+                <NeonGlassBoxV2
+                  topHue={45}
+                  bottomHue={183}
+                  glowBlur={15}
+                  glowOpacity={0.4}
+                  backdropBlur={8}
+                  glowPosition="corners"
+                >
+                  <div className="p-3">
+                    <video
+                      src="/images/aha-moment.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full rounded-xl"
+                    />
+                  </div>
+                </NeonGlassBoxV2>
               </div>
 
               <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
