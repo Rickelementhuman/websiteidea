@@ -240,7 +240,7 @@ export default function AnalystsLeadForm() {
                 </NeonGlassBoxV2>
               </div>
 
-              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
+              <p className="text-base md:text-lg text-white/70 mb-8 max-w-3xl mx-auto">
                 Clicks tell you what. Emotion tells you why. Get the data that turns "I don't know" into "Here's exactly why."
               </p>
 

@@ -161,7 +161,7 @@ export default function Growth1LeadMagnet() {
                 </NeonGlassBoxV2>
               </div>
 
-              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
+              <p className="text-base md:text-lg text-white/70 mb-8 max-w-3xl mx-auto">
                 They showed up with emotion data, attention tracking, and heat maps. You showed up with engagement metrics. The client noticed.
               </p>
 

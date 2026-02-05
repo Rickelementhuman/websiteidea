@@ -161,7 +161,7 @@ export default function BudgetHoldersLeadMagnet() {
                 </NeonGlassBoxV2>
               </div>
 
-              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto">
+              <p className="text-base md:text-lg text-white/70 mb-8 max-w-3xl mx-auto">
                 Likes don't pay the bills. Brand lift does. Get the data that makes CFOs listen—and budgets stick.
               </p>
 
