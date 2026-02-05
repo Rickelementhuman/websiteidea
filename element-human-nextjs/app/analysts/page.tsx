@@ -131,7 +131,7 @@ export default function AnalystsLeadMagnet() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
                 <span className="text-white">You Know What Happened. </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#12B8C9] to-[#0E98A5]">
                   Do You Know Why?

@@ -131,7 +131,7 @@ export default function BudgetHoldersLeadMagnet() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
                 <span className="text-white">Your CFO Asks What Your $500K Influencer Spend Delivered. </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#F9BE00] to-[#E0A800]">
                   What Do You Say?

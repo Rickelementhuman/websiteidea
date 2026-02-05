@@ -131,7 +131,7 @@ export default function Growth1LeadMagnet() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
                 <span className="text-white">Your Competitor Just Won a Pitch </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#FF2198] to-[#E01580]">
                   You Should Have Won
